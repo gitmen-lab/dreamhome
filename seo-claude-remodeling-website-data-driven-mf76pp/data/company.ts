@@ -35,7 +35,7 @@ export const company: Company = {
   tagline: "Trusted Home Remodeling Across the Dallas–Fort Worth Metroplex",
   phone: "+18173740962",
   phoneDisplay: "(817) 374-0962",
-  email: "info@mydreamhomeremodeling.com", // TODO: confirm real email address
+  email: "yojainier@mydreamhomeremodeling.com",
   address: {
     street: "5305 Hibbs Dr",
     city: "Fort Worth",
