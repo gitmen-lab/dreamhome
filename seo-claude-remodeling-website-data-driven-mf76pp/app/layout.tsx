@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { Inter } from "next/font/google";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -52,6 +53,7 @@ export default function RootLayout({
           strategy="lazyOnload"
         />
       </body>
+      <GoogleAnalytics gaId="G-SZN03QS8DJ" />
     </html>
   );
 }
