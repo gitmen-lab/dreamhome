@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Hero } from "@/components/Hero";
+import { ContactForm } from "@/components/ContactForm";
 import { TrustBadges } from "@/components/TrustBadges";
 import { ServiceCard } from "@/components/ServiceCard";
 import { CityLinks } from "@/components/CityLinks";
@@ -69,6 +70,7 @@ export default function HomePage() {
           src: "/images/dfw-home-remodel-exterior-dusk.jpg",
           alt: "Beautifully lit suburban home exterior at dusk",
         }}
+        formSlot={<ContactForm />}
       />
 
       <TrustBadges />
