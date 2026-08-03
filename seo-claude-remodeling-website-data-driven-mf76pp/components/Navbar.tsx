@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
-import { Menu, X, Phone, Hammer, ChevronDown } from "lucide-react";
+import { Menu, X, Phone, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { company } from "@/data/company";
 import { services } from "@/data/services";
@@ -26,12 +27,18 @@ export function Navbar() {
       <div className="container flex h-16 items-center justify-between">
         <Link
           href="/"
-          className="flex items-center gap-2 font-bold text-lg text-charcoal"
+          className="flex items-center gap-2.5 font-bold text-lg text-charcoal"
           aria-label={`${company.name} home`}
         >
-          <span className="flex h-9 w-9 items-center justify-center rounded-md bg-primary text-white">
-            <Hammer className="h-5 w-5" aria-hidden="true" />
-          </span>
+          <Image
+            src={company.logo}
+            alt={`${company.name} logo`}
+            width={175}
+            height={90}
+            className="h-9 w-auto shrink-0"
+            style={{ aspectRatio: "175 / 90" }}
+            priority
+          />
           <span className="hidden sm:inline">{company.name}</span>
           <span className="sm:hidden">{company.shortName}</span>
         </Link>

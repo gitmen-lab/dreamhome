@@ -1,5 +1,6 @@
+import Image from "next/image";
 import Link from "next/link";
-import { Phone, Mail, MapPin, Hammer } from "lucide-react";
+import { Phone, Mail, MapPin } from "lucide-react";
 import { company } from "@/data/company";
 import { services } from "@/data/services";
 import { cities } from "@/data/cities";
@@ -16,10 +17,17 @@ export function Footer() {
           <div>
             <Link
               href="/"
-              className="flex items-center gap-2 font-bold text-lg text-white"
+              className="flex items-center gap-2.5 font-bold text-lg text-white"
             >
-              <span className="flex h-9 w-9 items-center justify-center rounded-md bg-primary text-white">
-                <Hammer className="h-5 w-5" aria-hidden="true" />
+              <span className="flex shrink-0 items-center rounded-md bg-white p-1.5">
+                <Image
+                  src={company.logo}
+                  alt={`${company.name} logo`}
+                  width={175}
+                  height={90}
+                  className="h-8 w-auto shrink-0"
+                  style={{ aspectRatio: "175 / 90" }}
+                />
               </span>
               {company.name}
             </Link>

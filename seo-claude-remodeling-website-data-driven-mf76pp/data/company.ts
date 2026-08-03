@@ -31,7 +31,7 @@ export interface Company {
 export const company: Company = {
   name: "My Dream Home Remodeling",
   shortName: "My Dream Home",
-  legalName: "My Dream Home Remodeling", // TODO: confirm legal entity name (LLC?)
+  legalName: "My Dream Home Remodeling, LLC", // confirmed via real logo/trailer branding
   tagline: "Trusted Home Remodeling Across the Dallas–Fort Worth Metroplex",
   phone: "+18173740962",
   phoneDisplay: "(817) 374-0962",
@@ -44,8 +44,8 @@ export const company: Company = {
   },
   url: "https://mydreamhomeremodeling.com",
   coordinates: { lat: 32.8735, lng: -97.2889 }, // TODO: confirm exact coordinates
-  logo: "/images/logo.svg",
-  foundedYear: 2009,
+  logo: "/images/logo.png",
+  foundedYear: 2012, // confirmed by user, matches real logo "EST. 2012"
   license: "Licensed & Insured in Texas",
   // TODO: add real state contractor license number — displaying a verifiable
   // license number is one of the strongest trust/E-E-A-T signals available
@@ -60,7 +60,7 @@ export const company: Company = {
   social: [],
   serviceRadius: "Dallas–Fort Worth Metroplex",
   stats: [
-    { label: "Years in Business", value: "15+" },
+    { label: "Years in Business", value: "14+" },
     { label: "Projects Completed", value: "2,400+" },
     { label: "Cities Served", value: "20" },
     { label: "Average Rating", value: "4.9★" },

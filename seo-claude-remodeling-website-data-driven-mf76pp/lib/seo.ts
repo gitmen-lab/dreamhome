@@ -23,7 +23,7 @@ interface PageMeta {
 
 export function buildMetadata({ title, description, path, image }: PageMeta): Metadata {
   const url = `${SITE_URL}${path}`;
-  const ogImage = image ?? "/images/og-default.svg";
+  const ogImage = image ?? "/images/og-default.jpg";
   return {
     title,
     description,

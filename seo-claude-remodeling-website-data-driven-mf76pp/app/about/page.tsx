@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -20,6 +21,33 @@ export const metadata: Metadata = buildMetadata({
 });
 
 const crumbs = [{ name: "About", path: "/about" }];
+
+const crewPhotos = [
+  {
+    src: "/images/about/crew-building-backyard-pergola.jpg",
+    alt: "My Dream Home Remodeling crew members building a cedar pergola on a backyard patio",
+  },
+  {
+    src: "/images/about/finished-cedar-pergola-patio.jpg",
+    alt: "Completed cedar pergola with a corrugated roof over a backyard patio",
+  },
+  {
+    src: "/images/about/custom-fireplace-built-in-shiplap-mantle.jpg",
+    alt: "Custom shiplap fireplace built-in with a live-edge wood mantle and TV niche",
+  },
+  {
+    src: "/images/about/custom-built-in-wine-rack-shelving.jpg",
+    alt: "Custom built-in shelving and wine rack cabinetry with a stained wood countertop",
+  },
+  {
+    src: "/images/about/finished-wood-column-wainscoting-entry.jpg",
+    alt: "Finished custom wood column and wainscoting in a home entryway",
+  },
+  {
+    src: "/images/about/my-dream-home-remodeling-truck-trailer-front.jpg",
+    alt: "My Dream Home Remodeling branded truck and enclosed trailer",
+  },
+];
 
 const values = [
   {
@@ -135,6 +163,38 @@ export default function AboutPage() {
               </div>
             ))}
           </dl>
+        </div>
+      </section>
+
+      <section className="container section-padding" aria-labelledby="crew-photos-heading">
+        <div className="text-center max-w-2xl mx-auto">
+          <h2
+            id="crew-photos-heading"
+            className="text-3xl md:text-4xl font-bold tracking-tight text-charcoal"
+          >
+            Real Work, Real Craftsmanship
+          </h2>
+          <p className="mt-4 text-muted-foreground">
+            A few of our own crews, our truck, and custom builds — straight from the job
+            site, not a stock photo library.
+          </p>
+        </div>
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {crewPhotos.map((photo) => (
+            <div
+              key={photo.src}
+              className="relative aspect-[4/3] overflow-hidden rounded-lg border shadow-sm"
+            >
+              <Image
+                src={photo.src}
+                alt={photo.alt}
+                fill
+                loading="lazy"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                className="object-cover"
+              />
+            </div>
+          ))}
         </div>
       </section>
 
