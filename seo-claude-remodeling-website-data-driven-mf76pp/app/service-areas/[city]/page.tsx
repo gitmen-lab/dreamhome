@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import { Hero } from "@/components/Hero";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { NAPBlock } from "@/components/NAPBlock";
 import { LocationMap } from "@/components/LocationMap";
 import { ServiceCard } from "@/components/ServiceCard";
 import { Testimonials } from "@/components/Testimonials";
@@ -70,9 +69,6 @@ export default async function CityPage({ params }: { params: Promise<Params> }) 
     <>
       <JsonLd data={[faqSchema(localFaqs), breadcrumbSchema(crumbs)]} />
       <Breadcrumbs crumbs={crumbs} />
-      <div className="container pt-4">
-        <NAPBlock />
-      </div>
 
       <Hero
         compact

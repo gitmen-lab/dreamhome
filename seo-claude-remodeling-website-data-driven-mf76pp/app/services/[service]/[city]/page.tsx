@@ -6,7 +6,6 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Hero } from "@/components/Hero";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { NAPBlock } from "@/components/NAPBlock";
 import { ProcessSteps } from "@/components/ProcessSteps";
 import { Testimonials } from "@/components/Testimonials";
 import { FAQAccordion } from "@/components/FAQAccordion";
@@ -110,9 +109,6 @@ export default async function ServiceCityPage({
         ]}
       />
       <Breadcrumbs crumbs={crumbs} />
-      <div className="container pt-4">
-        <NAPBlock />
-      </div>
 
       <Hero
         compact
