@@ -65,6 +65,10 @@ export default function HomePage() {
           </>
         }
         subtitle={`Remodeling done right, backed by proof — searching for a remodeling contractor near me? From kitchens and bathrooms to painting, flooring, drywall, and demolition, ${company.name} delivers licensed, warrantied craftsmanship across ${cities.length} DFW communities.`}
+        backgroundImage={{
+          src: "/images/dfw-home-remodel-exterior-dusk.jpg",
+          alt: "Beautifully lit suburban home exterior at dusk",
+        }}
       />
 
       <TrustBadges />

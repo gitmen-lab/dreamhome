@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Phone, ShieldCheck, Star, BadgeCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -10,15 +11,39 @@ interface HeroProps {
   subtitle: string;
   eyebrow?: string;
   compact?: boolean;
+  backgroundImage?: { src: string; alt: string };
 }
 
-export function Hero({ title, subtitle, eyebrow, compact = false }: HeroProps) {
+export function Hero({
+  title,
+  subtitle,
+  eyebrow,
+  compact = false,
+  backgroundImage,
+}: HeroProps) {
   return (
     <section
       className={`relative overflow-hidden bg-charcoal-dark text-white ${
         compact ? "py-16 md:py-20" : "py-20 md:py-32"
       }`}
     >
+      {backgroundImage && (
+        <Image
+          src={backgroundImage.src}
+          alt={backgroundImage.alt}
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
+      )}
+      {/* Dark overlay so white text stays legible over a photo background */}
+      {backgroundImage && (
+        <div
+          className="pointer-events-none absolute inset-0 bg-gradient-to-r from-charcoal-dark via-charcoal-dark/85 to-charcoal-dark/50"
+          aria-hidden="true"
+        />
+      )}
       {/* Decorative gradient */}
       <div
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(37,99,235,0.35),transparent_55%),radial-gradient(ellipse_at_bottom_left,rgba(37,99,235,0.15),transparent_50%)]"
