@@ -40,10 +40,10 @@ export function Navbar() {
           <Image
             src={company.logo}
             alt={`${company.name} logo`}
-            width={175}
-            height={90}
+            width={250}
+            height={150}
             className="h-9 w-auto shrink-0"
-            style={{ aspectRatio: "175 / 90" }}
+            style={{ aspectRatio: "250 / 150" }}
             priority
           />
           <span className="hidden sm:inline">{company.name}</span>

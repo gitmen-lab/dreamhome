@@ -45,7 +45,7 @@ export const company: Company = {
   url: "https://mydreamhomeremodeling.com",
   coordinates: { lat: 32.8735, lng: -97.2889 }, // TODO: confirm exact coordinates
   logo: "/images/logo.png",
-  foundedYear: 2012, // confirmed by user, matches real logo "EST. 2012"
+  foundedYear: 2018, // confirmed by user, matches real logo "EST. 2018"
   license: "Licensed & Insured in Texas",
   // TODO: add real state contractor license number — displaying a verifiable
   // license number is one of the strongest trust/E-E-A-T signals available
@@ -60,7 +60,7 @@ export const company: Company = {
   social: [],
   serviceRadius: "Dallas–Fort Worth Metroplex",
   stats: [
-    { label: "Years in Business", value: "14+" },
+    { label: "Years in Business", value: "8+" },
     { label: "Projects Completed", value: "2,400+" },
     { label: "Cities Served", value: "20" },
     { label: "Average Rating", value: "4.9★" },

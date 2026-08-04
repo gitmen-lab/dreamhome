@@ -32,10 +32,10 @@ export function Footer() {
                 <Image
                   src={company.logo}
                   alt={`${company.name} logo`}
-                  width={175}
-                  height={90}
+                  width={250}
+                  height={150}
                   className="h-8 w-auto shrink-0"
-                  style={{ aspectRatio: "175 / 90" }}
+                  style={{ aspectRatio: "250 / 150" }}
                 />
               </span>
               {company.name}
