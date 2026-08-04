@@ -47,27 +47,20 @@ export default function BathtubToShowerConversionPage() {
     <>
       <JsonLd data={[serviceSchema(service), faqSchema(faqs)]} />
 
-      {/* Minimal header -- logo + phone only, no site nav */}
+      {/* Minimal header -- logo only, centered, no site nav */}
       <header className="border-b bg-white">
-        <div className="container flex h-16 items-center justify-between">
+        <div className="container flex h-20 items-center justify-center">
           <Link href="/" aria-label={`${company.name} home`}>
             <Image
               src={company.logo}
               alt={`${company.name} logo`}
               width={250}
               height={150}
-              className="h-10 w-auto"
+              className="h-14 w-auto"
               style={{ aspectRatio: "250 / 150" }}
               priority
             />
           </Link>
-          <a
-            href={telHref(company.phone)}
-            className="flex items-center gap-2 text-sm font-semibold text-charcoal hover:text-primary transition-colors"
-          >
-            <Phone className="h-4 w-4" aria-hidden="true" />
-            {company.phoneDisplay}
-          </a>
         </div>
       </header>
 
