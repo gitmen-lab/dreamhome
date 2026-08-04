@@ -135,7 +135,7 @@ export default function HomePage() {
                   key={stat.label}
                   className="rounded-lg border border-white/10 bg-white/5 p-8 text-center"
                 >
-                  <dd className="text-4xl font-bold text-primary">{stat.value}</dd>
+                  <dd className="text-4xl font-bold text-blue-300">{stat.value}</dd>
                   <dt className="mt-2 text-sm text-gray-300">{stat.label}</dt>
                 </div>
               ))}

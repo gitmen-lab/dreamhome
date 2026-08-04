@@ -24,21 +24,15 @@ export function Footer() {
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div>
-            <Link
-              href="/"
-              className="flex items-center gap-2.5 font-bold text-lg text-white"
-            >
-              <span className="flex shrink-0 items-center rounded-md bg-white p-1.5">
-                <Image
-                  src={company.logo}
-                  alt={`${company.name} logo`}
-                  width={250}
-                  height={150}
-                  className="h-8 w-auto shrink-0"
-                  style={{ aspectRatio: "250 / 150" }}
-                />
-              </span>
-              {company.name}
+            <Link href="/" aria-label={`${company.name} home`}>
+              <Image
+                src={company.logo}
+                alt={`${company.name} logo`}
+                width={800}
+                height={411}
+                className="h-10 w-auto shrink-0"
+                style={{ aspectRatio: "800 / 411" }}
+              />
             </Link>
             <p className="mt-4 text-sm leading-relaxed">{company.tagline}</p>
             <p className="mt-4 text-sm">

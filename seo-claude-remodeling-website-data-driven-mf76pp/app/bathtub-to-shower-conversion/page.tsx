@@ -49,17 +49,19 @@ export default function BathtubToShowerConversionPage() {
 
       {/* Minimal header -- logo only, centered, no site nav */}
       <header className="border-b bg-white">
-        <div className="container flex h-20 items-center justify-center">
+        <div className="container flex h-24 items-center justify-center">
           <Link href="/" aria-label={`${company.name} home`}>
-            <Image
-              src={company.logo}
-              alt={`${company.name} logo`}
-              width={250}
-              height={150}
-              className="h-14 w-auto"
-              style={{ aspectRatio: "250 / 150" }}
-              priority
-            />
+            <span className="flex items-center rounded-md bg-black px-4 py-2.5">
+              <Image
+                src={company.logo}
+                alt={`${company.name} logo`}
+                width={800}
+                height={411}
+                className="h-14 w-auto"
+                style={{ aspectRatio: "800 / 411" }}
+                priority
+              />
+            </span>
           </Link>
         </div>
       </header>
