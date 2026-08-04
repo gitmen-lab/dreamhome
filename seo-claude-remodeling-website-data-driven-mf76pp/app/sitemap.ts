@@ -17,6 +17,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/reviews`, changeFrequency: "weekly", priority: 0.6 },
     { url: `${SITE_URL}/contact`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${SITE_URL}/privacy-policy`, changeFrequency: "yearly", priority: 0.2 },
+    {
+      url: `${SITE_URL}/bathtub-to-shower-conversion`,
+      changeFrequency: "monthly",
+      priority: 0.5,
+    },
   ];
 
   const servicePages: MetadataRoute.Sitemap = services.map((service) => ({

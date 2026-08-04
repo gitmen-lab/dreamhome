@@ -3,12 +3,14 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X, Phone, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { company } from "@/data/company";
 import { services } from "@/data/services";
 import { telHref } from "@/lib/helpers";
 import { cn } from "@/lib/utils";
+import { STANDALONE_ROUTES } from "@/lib/standaloneRoutes";
 
 const navLinks = [
   { href: "/about", label: "About" },
@@ -19,8 +21,13 @@ const navLinks = [
 ];
 
 export function Navbar() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+
+  if (STANDALONE_ROUTES.includes(pathname)) {
+    return null;
+  }
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80">

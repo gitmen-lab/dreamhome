@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { GoogleAnalytics } from "@next/third-parties/google";
 import { Inter } from "next/font/google";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -33,6 +32,27 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={inter.variable}>
+      {/*
+        Plain HTML <script> tags (not next/script) so they're literal,
+        static markup in the server-rendered <head> -- required for Google
+        Search Console's "Google Analytics" domain-verification method,
+        which scans raw HTML and won't see anything next/script injects at
+        runtime, even with strategy="beforeInteractive".
+      */}
+      <head>
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-SZN03QS8DJ"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-SZN03QS8DJ');`,
+          }}
+        />
+      </head>
       <body className="flex min-h-screen flex-col font-sans">
         <JsonLd data={[organizationSchema(), localBusinessSchema(), websiteSchema()]} />
         <a
@@ -53,7 +73,6 @@ export default function RootLayout({
           strategy="lazyOnload"
         />
       </body>
-      <GoogleAnalytics gaId="G-SZN03QS8DJ" />
     </html>
   );
 }

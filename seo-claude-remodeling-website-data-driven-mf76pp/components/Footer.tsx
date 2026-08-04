@@ -1,13 +1,22 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Phone, Mail, MapPin } from "lucide-react";
 import { company } from "@/data/company";
 import { services } from "@/data/services";
 import { cities } from "@/data/cities";
 import { telHref, cityLabel } from "@/lib/helpers";
+import { STANDALONE_ROUTES } from "@/lib/standaloneRoutes";
 
 export function Footer() {
+  const pathname = usePathname();
   const year = new Date().getFullYear();
+
+  if (STANDALONE_ROUTES.includes(pathname)) {
+    return null;
+  }
 
   return (
     <footer className="bg-charcoal-dark text-gray-300">
