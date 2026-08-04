@@ -9,7 +9,7 @@ import { testimonials } from "@/data/testimonials";
 import { company } from "@/data/company";
 
 export const metadata: Metadata = buildMetadata({
-  title: `Customer Reviews — 4.9★ Rated Remodeler | ${company.name}`,
+  title: `Customer Reviews — ${company.googleRating}★ Rated Remodeler | ${company.name}`,
   description: `Read real reviews from DFW homeowners about ${company.name}'s kitchen remodels, bathroom renovations, painting, flooring, drywall, and demolition work.`,
   path: "/reviews",
 });
@@ -30,7 +30,8 @@ export default function ReviewsPage() {
                 <Star key={i} className="h-4 w-4 text-yellow-400 fill-yellow-400" />
               ))}
             </span>
-            4.9 average across hundreds of reviews
+            {company.googleRating} average across {company.googleReviewCount} Google
+            reviews
           </p>
           <h1 className="mt-4 text-4xl md:text-5xl font-bold tracking-tight text-charcoal">
             What DFW Homeowners Say About Us

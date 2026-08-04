@@ -185,10 +185,10 @@ export function localBusinessSchema(): JsonLd {
         },
       })),
     },
-    // NOTE: add an aggregateRating block here only with real review data
-    // (matching your Google Business Profile) — fabricated ratings in
-    // structured data risk manual penalties. See reviewSchema/aggregateRatingSchema
-    // below — wire them in once data/testimonials.ts holds real, verifiable reviews.
+    // Sourced from the business's actual Google Business Profile
+    // (company.googleRating/googleReviewCount) — keep those two fields
+    // updated if the real GBP rating changes.
+    aggregateRating: aggregateRatingSchema(),
   };
 }
 
@@ -204,12 +204,14 @@ export function websiteSchema(): JsonLd {
 }
 
 /**
- * Review/AggregateRating builders — not wired into any page yet.
- * data/testimonials.ts is placeholder content (see README "Replace the
- * placeholder stats" note), so marking it up as structured review data
- * would assert unverified ratings to search engines. Once real,
- * verifiable customer reviews replace that file, call these from
- * localBusinessSchema/serviceSchema to enable review rich results.
+ * Individual Review objects — not wired into any page yet. data/testimonials.ts
+ * is curated marketing copy (12 entries, all 5-star) and doesn't match the
+ * real Google review count (company.googleReviewCount, currently 8), so
+ * including it here would create a count mismatch against
+ * aggregateRatingSchema() -- exactly the kind of inconsistent structured
+ * data Google's guidelines warn about. Wire this in once individual
+ * testimonials are tied to real, verifiable Google reviews with matching
+ * counts.
  */
 export function reviewSchema(items: Testimonial[]): JsonLd[] {
   return items.map((t) => ({
@@ -227,13 +229,18 @@ export function reviewSchema(items: Testimonial[]): JsonLd[] {
   }));
 }
 
-export function aggregateRatingSchema(items: Testimonial[]): JsonLd | null {
-  if (items.length === 0) return null;
-  const ratingValue = items.reduce((sum, t) => sum + t.rating, 0) / items.length;
+/**
+ * Sourced from company.googleRating/googleReviewCount (verified against the
+ * business's actual Google Business Profile) — not derived from
+ * data/testimonials.ts, which is curated marketing copy, not a raw review
+ * feed, and doesn't share the same count. Keep this in sync with GBP by
+ * updating those two fields in data/company.ts, not this function.
+ */
+export function aggregateRatingSchema(): JsonLd {
   return {
     "@type": "AggregateRating",
-    ratingValue: Math.round(ratingValue * 10) / 10,
-    reviewCount: items.length,
+    ratingValue: company.googleRating,
+    reviewCount: company.googleReviewCount,
     bestRating: 5,
     worstRating: 1,
   };

@@ -17,7 +17,7 @@ export function TrustBadges() {
     {
       icon: ThumbsUp,
       title: `${companyStat("Average Rating")} Average Rating`,
-      description: "Hundreds of five-star reviews",
+      description: `${company.googleReviewCount} Google reviews`,
     },
     {
       icon: Clock,

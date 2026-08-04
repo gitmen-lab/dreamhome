@@ -26,6 +26,10 @@ export interface Company {
   serviceRadius: string;
   stats: { label: string; value: string }[];
   guarantees: string[];
+  /** Real Google Business Profile rating — used in AggregateRating schema and review copy. Update together. */
+  googleRating: number;
+  googleReviewCount: number;
+  googlePlaceId: string;
 }
 
 export const company: Company = {
@@ -43,7 +47,7 @@ export const company: Company = {
     zip: "76137",
   },
   url: "https://mydreamhomeremodeling.com",
-  coordinates: { lat: 32.8735, lng: -97.2889 }, // TODO: confirm exact coordinates
+  coordinates: { lat: 32.88996, lng: -97.27168 }, // confirmed exact coordinates for 5305 Hibbs Dr
   logo: "/images/logo.png",
   foundedYear: 2018, // confirmed by user, matches real logo "EST. 2018"
   license: "Licensed & Insured in Texas",
@@ -56,14 +60,20 @@ export const company: Company = {
     { days: "Saturday", hours: "8:00 AM – 4:00 PM" },
     { days: "Sunday", hours: "Closed" },
   ],
-  // Add real social profile URLs when available — these feed schema.org sameAs
-  social: [],
+  // Real Google Business Profile URL, built from the verified place ID below —
+  // this feeds schema.org sameAs on Organization.
+  social: [
+    {
+      name: "Google Business Profile",
+      url: "https://www.google.com/maps/place/?q=place_id:ChIJ0_oRRTptNyARlgRHBHCdLFM",
+    },
+  ],
   serviceRadius: "Dallas–Fort Worth Metroplex",
   stats: [
     { label: "Years in Business", value: "8+" },
     { label: "Projects Completed", value: "2,400+" },
     { label: "Cities Served", value: "20" },
-    { label: "Average Rating", value: "4.9★" },
+    { label: "Average Rating", value: "4.8★" },
   ],
   guarantees: [
     "Free, no-obligation estimates",
@@ -72,4 +82,8 @@ export const company: Company = {
     "Workmanship warranty on every project",
     "Clean job sites, every day",
   ],
+  // Confirmed from Google Business Profile data.
+  googleRating: 4.8,
+  googleReviewCount: 8,
+  googlePlaceId: "ChIJ0_oRRTptNyARlgRHBHCdLFM",
 };
