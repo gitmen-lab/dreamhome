@@ -32,18 +32,16 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80">
       <div className="container flex h-16 items-center justify-between">
-        <Link href="/" aria-label={`${company.name} home`}>
-          <span className="flex shrink-0 items-center rounded-md bg-black px-3 py-2">
-            <Image
-              src={company.logo}
-              alt={`${company.name} logo`}
-              width={800}
-              height={411}
-              className="h-10 w-auto shrink-0"
-              style={{ aspectRatio: "800 / 411" }}
-              priority
-            />
-          </span>
+        <Link href="/" aria-label={`${company.name} home`} className="shrink-0">
+          <Image
+            src={company.logo}
+            alt={`${company.name} logo`}
+            width={600}
+            height={121}
+            className="h-10 w-auto rounded-md shadow-sm"
+            style={{ aspectRatio: "600 / 121" }}
+            priority
+          />
         </Link>
 
         {/* Desktop nav */}

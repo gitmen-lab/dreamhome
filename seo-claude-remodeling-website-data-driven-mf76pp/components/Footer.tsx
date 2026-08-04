@@ -28,10 +28,10 @@ export function Footer() {
               <Image
                 src={company.logo}
                 alt={`${company.name} logo`}
-                width={800}
-                height={411}
-                className="h-10 w-auto shrink-0"
-                style={{ aspectRatio: "800 / 411" }}
+                width={600}
+                height={121}
+                className="h-10 w-auto shrink-0 rounded-md"
+                style={{ aspectRatio: "600 / 121" }}
               />
             </Link>
             <p className="mt-4 text-sm leading-relaxed">{company.tagline}</p>

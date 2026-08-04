@@ -52,7 +52,7 @@ export default function BathtubToShowerConversionPage() {
         <div className="container flex items-center justify-center py-2.5">
           <Link href="/" aria-label={`${company.name} home`}>
             <Image
-              src="/images/logo-banner.png"
+              src="/images/mydreamhome-logo.png"
               alt={`${company.name} logo`}
               width={600}
               height={121}

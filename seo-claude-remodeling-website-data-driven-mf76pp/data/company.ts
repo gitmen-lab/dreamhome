@@ -48,7 +48,7 @@ export const company: Company = {
   },
   url: "https://mydreamhomeremodeling.com",
   coordinates: { lat: 32.88996, lng: -97.27168 }, // confirmed exact coordinates for 5305 Hibbs Dr
-  logo: "/images/logo-v2.png",
+  logo: "/images/mydreamhome-logo.png",
   foundedYear: 2018, // confirmed by user, matches real logo "EST. 2018"
   license: "Licensed & Insured in Texas",
   // TODO: add real state contractor license number — displaying a verifiable
