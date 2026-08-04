@@ -4,4 +4,7 @@
  * that need a focused, single-CTA layout. Add new ones here rather than
  * duplicating the check in both Navbar and Footer.
  */
-export const STANDALONE_ROUTES: string[] = ["/bathtub-to-shower-conversion"];
+export const STANDALONE_ROUTES: string[] = [
+  "/bathtub-to-shower-conversion",
+  "/bath-renovation-near-you",
+];
