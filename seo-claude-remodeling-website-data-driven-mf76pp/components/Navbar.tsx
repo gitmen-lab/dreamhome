@@ -14,6 +14,7 @@ import { STANDALONE_ROUTES } from "@/lib/standaloneRoutes";
 
 const navLinks = [
   { href: "/about", label: "About" },
+  { href: "/blog", label: "Blog" },
   { href: "/gallery", label: "Gallery" },
   { href: "/reviews", label: "Reviews" },
   { href: "/service-areas", label: "Service Areas" },

@@ -5,6 +5,7 @@ import type { City } from "@/data/cities";
 import { cities } from "@/data/cities";
 import { services } from "@/data/services";
 import type { Testimonial } from "@/data/testimonials";
+import type { BlogPost } from "@/data/blogPosts";
 import { cityLabel } from "@/lib/helpers";
 import { generateSEODescription } from "@/lib/content";
 
@@ -282,6 +283,20 @@ export function serviceSchema(service: Service, city?: City): JsonLd {
           })),
         },
       }),
+  };
+}
+
+export function articleSchema(post: BlogPost): JsonLd {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.metaDescription,
+    datePublished: post.publishedDate,
+    dateModified: post.updatedDate ?? post.publishedDate,
+    author: { "@type": "Organization", name: company.name, url: `${SITE_URL}/about` },
+    publisher: { "@id": `${SITE_URL}/#organization` },
+    image: `${SITE_URL}${post.heroImage.src}`,
   };
 }
 
