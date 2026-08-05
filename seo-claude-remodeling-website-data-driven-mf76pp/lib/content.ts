@@ -10,6 +10,10 @@ import { pickVariant, cityLabel } from "@/lib/helpers";
  * deterministically per service+city pair, then weaves in city-specific data
  * (county, neighborhoods, housing stock). The result: 120 pages that are
  * genuinely different from each other and locally useful — not spun text.
+ *
+ * Voice: short sentences, real numbers over adjectives, "call us" not
+ * "contact us," free/no-obligation estimate framed plainly. See
+ * references/voice.md and references/humour.md.
  */
 
 export function generateServiceIntro(service: Service, city: City): string {
@@ -17,22 +21,22 @@ export function generateServiceIntro(service: Service, city: City): string {
   const highlight = pickVariant(seed + ":hl", city.localHighlights);
 
   const openers = [
-    `${company.name} provides licensed ${service.name.toLowerCase()} throughout ${cityLabel(city)}.`,
-    `${company.name} brings professional ${service.name.toLowerCase()} to homeowners across ${cityLabel(city)}.`,
-    `${city.city} homeowners rely on ${company.name} for licensed ${service.name.toLowerCase()}, backed by a workmanship warranty.`,
-    `From ${highlight} to every corner of ${city.city}, ${company.name} crews handle ${service.name.toLowerCase()} for local homeowners.`,
+    `${company.name} handles ${service.name.toLowerCase()} for homeowners across ${cityLabel(city)}. Licensed, insured, one crew for every trade.`,
+    `${city.city} homeowners call us for ${service.name.toLowerCase()} because we quote it straight and finish on schedule.`,
+    `We've worked on homes from ${highlight} to every other corner of ${city.city}. ${service.name} is one of six things we do, all under one roof.`,
+    `${company.name} runs ${service.name.toLowerCase()} projects in ${cityLabel(city)} the same way every time: free estimate, written scope, one project manager.`,
   ];
 
   const middles = [
-    `We've served ${city.county} for over ${new Date().getFullYear() - company.foundedYear} years, and ${city.city}'s homes — ${city.housingNote} — are territory we know well.`,
-    `${city.city} features ${city.housingNote}, and our team has hands-on experience with exactly these kinds of projects throughout ${city.county}.`,
-    `Homes here are ${city.housingNote}. That local knowledge shapes how we plan, price, and build every project in ${city.city}.`,
+    `We've served ${city.county} for ${new Date().getFullYear() - company.foundedYear}+ years. ${city.city} homes are ${city.housingNote} — we know what that means for a project before we walk in the door.`,
+    `${city.city} homes are typically ${city.housingNote}. That shapes the estimate, the schedule, and what we watch for once demo starts.`,
+    `We know ${city.county}'s housing stock. ${city.housingNote} isn't a surprise to us — it's what we plan around.`,
   ];
 
   const closers = [
-    `Every project starts with a free on-site estimate and ends with a walkthrough you sign off on.`,
-    `You get a dedicated project manager, a written schedule, and a workmanship warranty — standard on every job.`,
-    `Free estimates, transparent pricing, and crews who clean up daily: that's how we've earned our reputation across the Metroplex.`,
+    `Every project starts with a free, no-obligation estimate and ends with a walkthrough you sign off on.`,
+    `One project manager, a written schedule, and a workmanship warranty — standard on every job, no upcharge.`,
+    `Free estimates. Line-item pricing. A crew that cleans up before they leave. That's the whole pitch.`,
   ];
 
   return [
@@ -45,15 +49,15 @@ export function generateServiceIntro(service: Service, city: City): string {
 export function generateSEODescription(service: Service, city: City): string {
   const seed = `${service.slug}:${city.slug}:seo`;
   const variants = [
-    `Professional ${service.name.toLowerCase()} in ${cityLabel(city)}. Licensed & insured, free estimates, workmanship warranty. Serving ${city.county} since ${company.foundedYear}. Call ${company.phoneDisplay}.`,
-    `Need ${service.name.toLowerCase()} in ${cityLabel(city)}? ${company.name} delivers quality craftsmanship with transparent pricing and free estimates. Call ${company.phoneDisplay} today.`,
-    `Top-rated ${service.name.toLowerCase()} for ${city.city} homeowners. Free on-site estimates, licensed crews, and a written warranty on every project. Call ${company.phoneDisplay}.`,
-    `${company.name} provides expert ${service.name.toLowerCase()} throughout ${cityLabel(city)} and ${city.county}. Free estimates and honest, itemized pricing. ${company.phoneDisplay}.`,
-    `Searching for ${service.name.toLowerCase()} near me in ${cityLabel(city)}? ${company.name} brings licensed, insured crews and a free on-site quote to every ${city.city} project.`,
-    `${service.name} in ${cityLabel(city)}, done right: free estimates, milestone-based payments, and a workmanship warranty from a crew that knows ${city.county}. Call ${company.phoneDisplay}.`,
-    `Typical timeline for ${service.name.toLowerCase()} in ${city.city}: ${service.duration}. ${company.name} gives ${city.city} homeowners a written, line-item estimate before any work begins.`,
-    `${city.city} homeowners trust ${company.name} for ${service.name.toLowerCase()} — licensed crews, transparent pricing, and a dedicated project manager on every job. Call ${company.phoneDisplay}.`,
-    `Get a free ${service.name.toLowerCase()} estimate in ${cityLabel(city)}. ${company.name} has served ${city.county} homeowners since ${company.foundedYear} with honest, itemized pricing.`,
+    `${service.name} in ${cityLabel(city)}: licensed & insured, free estimate, workmanship warranty. Serving ${city.county} since ${company.foundedYear}. Call ${company.phoneDisplay}.`,
+    `${service.name} in ${cityLabel(city)}. Free, no-obligation estimate. Line-item pricing, no surprises. Call ${company.phoneDisplay}.`,
+    `${city.city} ${service.name.toLowerCase()}: one crew, every trade, a workmanship warranty on every job. Free on-site estimate. Call ${company.phoneDisplay}.`,
+    `${company.name} does ${service.name.toLowerCase()} throughout ${cityLabel(city)} and ${city.county}. Free estimate, honest, itemized pricing. ${company.phoneDisplay}.`,
+    `Looking for ${service.name.toLowerCase()} near me in ${cityLabel(city)}? Licensed crew, free on-site quote, every ${city.city} project. Call ${company.phoneDisplay}.`,
+    `${service.name} in ${cityLabel(city)}: free estimate, milestone payments, a crew that knows ${city.county}. Call ${company.phoneDisplay}.`,
+    `${service.name} in ${city.city} typically takes ${service.duration}. Written, line-item estimate before any work begins. Call ${company.phoneDisplay}.`,
+    `${city.city} homeowners call ${company.name} for ${service.name.toLowerCase()} — licensed crews, itemized pricing, one project manager per job. ${company.phoneDisplay}.`,
+    `Free ${service.name.toLowerCase()} estimate in ${cityLabel(city)}. ${company.name} has worked in ${city.county} since ${company.foundedYear}. Call ${company.phoneDisplay}.`,
   ];
   return pickVariant(seed, variants);
 }
@@ -62,7 +66,7 @@ export function generateSEODescription(service: Service, city: City): string {
 export function generateNearMeFaq(service: Service): ServiceFAQ {
   return {
     question: `Do you offer ${service.name.toLowerCase()} near me?`,
-    answer: `Likely, yes. ${company.name} serves 20 DFW Metroplex communities, including Fort Worth, Arlington, Denton, and Southlake. Search "${service.name.toLowerCase()} near me" and check our service areas page, or contact us directly — if you're anywhere in the Metroplex, there's a good chance we already work in your neighborhood.`,
+    answer: `Likely, yes. ${company.name} covers 20 DFW Metroplex cities, including Fort Worth, Arlington, Denton, and Southlake. Check our service areas page, or just call us — if you're in the Metroplex, there's a good chance we already work in your neighborhood.`,
   };
 }
 
@@ -71,15 +75,15 @@ export function generateFAQs(service: Service, city: City): ServiceFAQ[] {
   const localFaqs: ServiceFAQ[] = [
     {
       question: `Do you offer ${service.name.toLowerCase()} near me in ${cityLabel(city)}?`,
-      answer: `Yes — ${company.name} serves all of ${city.city}, including the ${city.zipCodes.slice(0, 4).join(", ")} zip code${city.zipCodes.length > 1 ? "s" : ""}, plus surrounding ${city.county} communities. On-site estimates in ${city.city} are always free.`,
+      answer: `Yes. We work all of ${city.city}, including the ${city.zipCodes.slice(0, 4).join(", ")} zip code${city.zipCodes.length > 1 ? "s" : ""}, plus surrounding ${city.county} communities. On-site estimates here are always free.`,
     },
     {
-      question: `How much does ${service.shortName.toLowerCase() === service.name.toLowerCase() ? service.name.toLowerCase() : service.name.toLowerCase()} cost in ${city.city}?`,
-      answer: `Pricing depends on your home's size, condition, and material choices — ${city.city} homes are typically ${city.housingNote}, which we factor into every quote. Typical project duration is ${service.duration}. We provide a free, line-item estimate so you know the exact cost before work begins.`,
+      question: `How much does ${service.name.toLowerCase()} cost in ${city.city}?`,
+      answer: `Depends on your home's size, condition, and material choices — ${city.city} homes are typically ${city.housingNote}, and we factor that into every quote. Typical timeline: ${service.duration}. You get a free, line-item estimate before anything starts, so the cost is never a surprise.`,
     },
     {
       question: `Are you licensed to work in ${city.city}?`,
-      answer: `Yes. We're licensed and insured across Texas, and we handle any permits ${city.city} or ${city.county} requires for your project, including scheduling inspections.`,
+      answer: `Yes. Licensed and insured across Texas. We pull any permits ${city.city} or ${city.county} requires and schedule the inspections.`,
     },
   ];
   return [...localFaqs, ...service.faqs];
@@ -94,14 +98,15 @@ export interface CTAContent {
 export function generateCTA(service: Service, city: City): CTAContent {
   const seed = `${service.slug}:${city.slug}:cta`;
   const headings = [
-    `Ready to Start Your ${service.shortName} Project in ${city.city}?`,
-    `Get Your Free ${service.shortName} Estimate in ${cityLabel(city)}`,
-    `${city.city}'s Trusted ${service.shortName} Experts Are One Call Away`,
+    `Start Your ${service.shortName} Project in ${city.city}`,
+    `Get a Free ${service.shortName} Estimate in ${cityLabel(city)}`,
+    `${city.city} ${service.shortName}, Done Right`,
   ];
   const bodies = [
-    `Tell us about your project and we'll schedule a free on-site estimate at your ${city.city} home — no pressure, no obligation, just honest numbers.`,
-    `Join hundreds of ${city.county} homeowners who trusted ${company.name} with their homes. Free estimates, transparent pricing, and a warranty on every project.`,
-    `From the first walkthrough to the final inspection, you'll know exactly what's happening and what it costs. Schedule your free ${city.city} estimate today.`,
+    `Tell us about the project. We'll schedule a free, no-obligation estimate at your ${city.city} home — no pressure, just real numbers.`,
+    `Free estimate, line-item pricing, a workmanship warranty. That's what every ${city.county} homeowner gets from us.`,
+    `From the first walkthrough to the final inspection, you'll know what's happening and what it costs. Schedule your free ${city.city} estimate.`,
+    `Free estimate. (Yes, everyone says that. Ours doesn't turn into a bigger number once we're inside.)`,
   ];
   return {
     heading: pickVariant(seed + ":h", headings),
@@ -113,13 +118,13 @@ export function generateCTA(service: Service, city: City): CTAContent {
 /** Intro paragraph for city landing pages */
 export function generateCityIntro(city: City): string {
   const years = new Date().getFullYear() - company.foundedYear;
-  return `${city.localDescription} ${company.name} has proudly served ${cityLabel(
+  return `${city.localDescription} We've worked in ${cityLabel(
     city
-  )} and the wider ${city.county} area for ${years}+ years, helping homeowners with ${
+  )} and ${city.county} for ${years}+ years — ${
     city.housingNote
-  }. From ${city.localHighlights[0]} to ${
+  } is what we see on most calls out here. From ${city.localHighlights[0]} to ${
     city.localHighlights[1]
-  }, our crews are part of the neighborhood.`;
+  }, we know these streets.`;
 }
 
 /**
@@ -133,19 +138,19 @@ export function generateCityFaqs(city: City): ServiceFAQ[] {
   return [
     {
       question: `Which remodeling services do you offer in ${cityLabel(city)}?`,
-      answer: `All six of our services are available in ${city.city}: interior & exterior painting, floor installation, bathroom remodeling, kitchen remodeling, drywall repair, and demolition. Every project includes a free on-site estimate.`,
+      answer: `All six: interior & exterior painting, floor installation, bathroom remodeling, kitchen remodeling, drywall repair, and demolition. Every project starts with a free on-site estimate.`,
     },
     {
       question: `Which parts of ${city.city} do you cover?`,
-      answer: `We serve all of ${city.city}, including ${city.localHighlights.join(", ")}, and the ${city.zipCodes.join(", ")} zip code${city.zipCodes.length > 1 ? "s" : ""} — plus surrounding ${city.county} communities.`,
+      answer: `All of it, including ${city.localHighlights.join(", ")}, and the ${city.zipCodes.join(", ")} zip code${city.zipCodes.length > 1 ? "s" : ""} — plus surrounding ${city.county} communities.`,
     },
     {
       question: `How much does remodeling cost in ${city.city}?`,
-      answer: `It depends on the project and your home — ${city.city} homes are typically ${city.housingNote}, which we factor into every quote. We provide a free, line-item estimate before any work begins, so you know the exact cost upfront regardless of which service you need.`,
+      answer: `Depends on the project and your home — ${city.city} homes are typically ${city.housingNote}, and we factor that into every quote. You get a free, line-item estimate before any work begins, whichever service you need.`,
     },
     {
       question: `Are you licensed to work in ${city.city}?`,
-      answer: `Yes. We're licensed and insured across Texas, and we handle any permits ${city.city} or ${city.county} requires for your project, including scheduling inspections.`,
+      answer: `Yes. Licensed and insured across Texas. We pull any permits ${city.city} or ${city.county} requires and schedule the inspections.`,
     },
   ];
 }
@@ -161,7 +166,7 @@ export function generateAreasWeServe(city: City): string {
   const landmarkSentence = city.landmarks?.length
     ? ` We work near local landmarks like ${city.landmarks.slice(0, 3).join(", ")}, and everywhere in between.`
     : "";
-  return `We serve every neighborhood in ${city.city}, including ${neighborhoods}, and the following zip codes: ${zips}.${landmarkSentence} If you're in ${city.county}, chances are we've already worked on your street.`;
+  return `We work all of ${city.city}, including ${neighborhoods}, and these zip codes: ${zips}.${landmarkSentence} If you're in ${city.county}, there's a good chance we've already been on your street.`;
 }
 
 /** "Why choose us" bullets for city pages, lightly localized */
@@ -173,11 +178,11 @@ export function generateWhyChooseUs(city: City): { title: string; description: s
     },
     {
       title: "Licensed, Insured & Warrantied",
-      description: `Every crew is licensed and insured in Texas, and every project carries our workmanship warranty.`,
+      description: `Every crew is licensed and insured in Texas. Every project carries our workmanship warranty.`,
     },
     {
       title: "Transparent, Itemized Pricing",
-      description: `Free on-site estimates with line-item pricing — ${city.city} homeowners always know exactly what they're paying for.`,
+      description: `Free on-site estimate, line-item pricing. ${city.city} homeowners always know exactly what they're paying for.`,
     },
     {
       title: "One Project Manager, Start to Finish",
