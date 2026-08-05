@@ -91,6 +91,11 @@ export function FooterEs() {
                 </Link>
               </li>
               <li>
+                <Link href="/es-mx/blog" className="hover:text-white transition-colors">
+                  Blog
+                </Link>
+              </li>
+              <li>
                 <Link href="/" className="hover:text-white transition-colors">
                   Sitio en Inglés
                 </Link>

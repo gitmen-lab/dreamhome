@@ -2,38 +2,39 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { buildMetadata } from "@/lib/seo";
-import { blogPosts } from "@/data/blogPosts";
+import { blogPostsEsMx } from "@/data/blogPosts.es-mx";
 import { company } from "@/data/company";
 
 export const metadata: Metadata = buildMetadata({
-  title: `Remodeling Guides & Advice | ${company.name}`,
-  description: `Practical guides on kitchen, bathroom, and home remodeling for DFW homeowners, from ${company.name}.`,
-  path: "/blog",
-  alternateLanguages: { "es-MX": "/es-mx/blog" },
+  title: `Guías y Consejos de Remodelación | ${company.name}`,
+  description: `Guías prácticas sobre remodelación de cocinas, baños, y casas para propietarios de DFW, de parte de ${company.name}.`,
+  path: "/es-mx/blog",
+  locale: "es_MX",
+  alternateLanguages: { "en-US": "/blog" },
 });
 
-export default function BlogIndexPage() {
+export default function BlogIndexPageEsMx() {
   return (
     <div className="container section-padding">
       <div className="text-center max-w-2xl mx-auto">
         <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-charcoal">
-          Remodeling Guides &amp; Advice
+          Guías y Consejos de Remodelación
         </h1>
         <p className="mt-4 text-muted-foreground">
-          Practical, real-world guidance for DFW homeowners, from the {company.name} team.
+          Orientación práctica y real para propietarios de DFW, del equipo de {company.name}.
         </p>
       </div>
 
-      {blogPosts.length === 0 ? (
+      {blogPostsEsMx.length === 0 ? (
         <p className="mt-12 text-center text-muted-foreground">
-          New posts are on the way — check back soon.
+          Nuevas publicaciones en camino — vuelva pronto.
         </p>
       ) : (
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {blogPosts.map((post) => (
+          {blogPostsEsMx.map((post) => (
             <Link
               key={post.slug}
-              href={`/blog/${post.slug}`}
+              href={`/es-mx/blog/${post.slug}`}
               className="group overflow-hidden rounded-lg border bg-card shadow-sm transition-shadow hover:shadow-lg"
             >
               <div className="relative aspect-[4/3] overflow-hidden bg-muted">

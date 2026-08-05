@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { services } from "@/data/services";
 import { cities } from "@/data/cities";
 import { blogPosts } from "@/data/blogPosts";
+import { blogPostSlugsEsMx } from "@/data/blogPosts.es-mx";
 import { SITE_URL } from "@/lib/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -33,7 +34,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.7,
     },
-    { url: `${SITE_URL}/blog`, changeFrequency: "weekly", priority: 0.7 },
+    {
+      url: `${SITE_URL}/blog`,
+      changeFrequency: "weekly",
+      priority: 0.7,
+      alternates: { languages: { "es-MX": `${SITE_URL}/es-mx/blog` } },
+    },
     {
       url: `${SITE_URL}/es-mx`,
       changeFrequency: "weekly",
@@ -46,12 +52,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
       alternates: { languages: { "en-US": `${SITE_URL}/service-areas` } },
     },
+    {
+      url: `${SITE_URL}/es-mx/blog`,
+      changeFrequency: "weekly",
+      priority: 0.65,
+      alternates: { languages: { "en-US": `${SITE_URL}/blog` } },
+    },
   ];
 
   const blogPages: MetadataRoute.Sitemap = blogPosts.map((post) => ({
     url: `${SITE_URL}/blog/${post.slug}`,
     changeFrequency: "monthly",
     priority: 0.6,
+    ...(blogPostSlugsEsMx.includes(post.slug) && {
+      alternates: { languages: { "es-MX": `${SITE_URL}/es-mx/blog/${post.slug}` } },
+    }),
+  }));
+
+  const blogPagesEsMx: MetadataRoute.Sitemap = blogPostSlugsEsMx.map((slug) => ({
+    url: `${SITE_URL}/es-mx/blog/${slug}`,
+    changeFrequency: "monthly",
+    priority: 0.55,
+    alternates: { languages: { "en-US": `${SITE_URL}/blog/${slug}` } },
   }));
 
   const servicePages: MetadataRoute.Sitemap = services.map((service) => ({
@@ -106,5 +128,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...cityPagesEsMx,
     ...serviceCityPages,
     ...blogPages,
+    ...blogPagesEsMx,
   ];
 }

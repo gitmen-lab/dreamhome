@@ -3,9 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ChevronLeft } from "lucide-react";
-import { getBlogPost, blogPostSlugs } from "@/data/blogPosts";
-import { blogPostSlugsEsMx } from "@/data/blogPosts.es-mx";
-import { blogBodies } from "@/content/blog";
+import { getBlogPostEsMx, blogPostSlugsEsMx } from "@/data/blogPosts.es-mx";
+import { blogBodiesEsMx } from "@/content/blog/es-mx";
 import {
   buildMetadata,
   articleSchema,
@@ -13,7 +12,7 @@ import {
   breadcrumbSchema,
   serviceSchema,
 } from "@/lib/seo";
-import { getService } from "@/data/services";
+import { getServiceEsMx } from "@/data/services.es-mx";
 import { JsonLd } from "@/components/JsonLd";
 
 interface Params {
@@ -23,7 +22,7 @@ interface Params {
 export const dynamicParams = false;
 
 export function generateStaticParams(): Params[] {
-  return blogPostSlugs.map((slug) => ({ slug }));
+  return blogPostSlugsEsMx.map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -32,29 +31,28 @@ export async function generateMetadata({
   params: Promise<Params>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = getBlogPost(slug);
+  const post = getBlogPostEsMx(slug);
   if (!post) return {};
   return buildMetadata({
     title: post.title,
     description: post.metaDescription,
-    path: `/blog/${post.slug}`,
+    path: `/es-mx/blog/${post.slug}`,
     image: post.heroImage.src,
-    ...(blogPostSlugsEsMx.includes(post.slug) && {
-      alternateLanguages: { "es-MX": `/es-mx/blog/${post.slug}` },
-    }),
+    locale: "es_MX",
+    alternateLanguages: { "en-US": `/blog/${post.slug}` },
   });
 }
 
-export default async function BlogPostPage({
+export default async function BlogPostPageEsMx({
   params,
 }: {
   params: Promise<Params>;
 }) {
   const { slug } = await params;
-  const post = getBlogPost(slug);
+  const post = getBlogPostEsMx(slug);
   if (!post) notFound();
-  const Body = blogBodies[post.slug];
-  const service = post.relatedServiceSlug ? getService(post.relatedServiceSlug) : undefined;
+  const Body = blogBodiesEsMx[post.slug];
+  const service = post.relatedServiceSlug ? getServiceEsMx(post.relatedServiceSlug) : undefined;
 
   return (
     <article className="py-14 md:py-20">
@@ -62,9 +60,9 @@ export default async function BlogPostPage({
         data={[
           articleSchema(post),
           breadcrumbSchema([
-            { name: "Home", path: "/" },
-            { name: "Blog", path: "/blog" },
-            { name: post.title, path: `/blog/${post.slug}` },
+            { name: "Inicio", path: "/es-mx" },
+            { name: "Blog", path: "/es-mx/blog" },
+            { name: post.title, path: `/es-mx/blog/${post.slug}` },
           ]),
           ...(post.faqs && post.faqs.length > 0 ? [faqSchema(post.faqs)] : []),
           ...(service ? [serviceSchema(service)] : []),
@@ -72,11 +70,11 @@ export default async function BlogPostPage({
       />
       <div className="container max-w-3xl">
         <Link
-          href="/blog"
+          href="/es-mx/blog"
           className="inline-flex items-center gap-1 text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
         >
           <ChevronLeft className="h-4 w-4" aria-hidden="true" />
-          Back to Blog
+          Volver al Blog
         </Link>
 
         <h1 className="mt-4 text-3xl font-bold tracking-tight text-charcoal sm:text-4xl">
@@ -84,7 +82,7 @@ export default async function BlogPostPage({
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
           {post.publishedDate}
-          {post.updatedDate ? ` (updated ${post.updatedDate})` : ""}
+          {post.updatedDate ? ` (actualizado ${post.updatedDate})` : ""}
         </p>
 
         <div className="relative mt-8 aspect-[16/9] overflow-hidden rounded-lg border">
@@ -105,7 +103,7 @@ export default async function BlogPostPage({
         {post.faqs && post.faqs.length > 0 && (
           <div className="mt-14">
             <h2 className="text-2xl font-bold tracking-tight text-charcoal">
-              Frequently Asked Questions
+              Preguntas Frecuentes
             </h2>
             <dl className="mt-6 space-y-6">
               {post.faqs.map((faq) => (

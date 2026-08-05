@@ -82,6 +82,12 @@ export function NavbarEs() {
           >
             Áreas de Servicio
           </Link>
+          <Link
+            href="/es-mx/blog"
+            className="text-sm font-medium text-charcoal hover:text-primary transition-colors"
+          >
+            Blog
+          </Link>
         </nav>
 
         <div className="hidden lg:flex items-center gap-3">
@@ -142,6 +148,13 @@ export function NavbarEs() {
             onClick={() => setOpen(false)}
           >
             Áreas de Servicio
+          </Link>
+          <Link
+            href="/es-mx/blog"
+            className="block rounded-md px-3 py-2.5 text-sm font-medium text-charcoal hover:bg-accent"
+            onClick={() => setOpen(false)}
+          >
+            Blog
           </Link>
           {englishHref && (
             <Link
