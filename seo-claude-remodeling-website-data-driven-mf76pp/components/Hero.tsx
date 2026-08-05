@@ -19,7 +19,28 @@ interface HeroProps {
    * pages) never pull its JS into their bundle.
    */
   formSlot?: ReactNode;
+  /** Defaults to "en". Only swaps this component's own hardcoded strings. */
+  locale?: "en" | "es";
 }
+
+const STRINGS = {
+  en: {
+    getEstimate: "Get a Free Estimate",
+    licensedInsured: "Licensed & Insured",
+    workmanshipWarranty: "Workmanship Warranty",
+    averageRating: "Average Rating",
+    formHeading: "Get Your Free Estimate",
+    formSubheading: "We respond to every request within one business day.",
+  },
+  es: {
+    getEstimate: "Solicitar Cotización Gratuita",
+    licensedInsured: "Con Licencia y Seguro",
+    workmanshipWarranty: "Garantía de Mano de Obra",
+    averageRating: "Calificación Promedio",
+    formHeading: "Solicite su Cotización Gratuita",
+    formSubheading: "Respondemos a cada solicitud dentro de un día hábil.",
+  },
+};
 
 export function Hero({
   title,
@@ -28,7 +49,9 @@ export function Hero({
   compact = false,
   backgroundImage,
   formSlot,
+  locale = "en",
 }: HeroProps) {
+  const t = STRINGS[locale];
   const content = (
     <div className={formSlot ? "" : "max-w-3xl"}>
       {eyebrow && (
@@ -43,7 +66,9 @@ export function Hero({
       <p className="mt-6 text-lg md:text-xl text-gray-300 leading-relaxed">{subtitle}</p>
       <div className="mt-8 flex flex-col sm:flex-row gap-4">
         <Button size="lg" asChild>
-          <Link href="/contact">Get a Free Estimate</Link>
+          {/* No Spanish /contact page in this pilot yet — links to the real English
+              contact page rather than a route that doesn't exist. */}
+          <Link href="/contact">{t.getEstimate}</Link>
         </Button>
         <Button size="lg" variant="white" asChild>
           <a href={telHref(company.phone)}>
@@ -55,15 +80,15 @@ export function Hero({
       <ul className="mt-10 flex flex-wrap gap-x-8 gap-y-3 text-sm text-gray-300">
         <li className="flex items-center gap-2">
           <ShieldCheck className="h-5 w-5 text-primary" aria-hidden="true" />
-          Licensed &amp; Insured
+          {t.licensedInsured}
         </li>
         <li className="flex items-center gap-2">
           <BadgeCheck className="h-5 w-5 text-primary" aria-hidden="true" />
-          Workmanship Warranty
+          {t.workmanshipWarranty}
         </li>
         <li className="flex items-center gap-2">
           <Star className="h-5 w-5 text-yellow-400 fill-yellow-400" aria-hidden="true" />
-          {companyStat("Average Rating")} Average Rating
+          {companyStat("Average Rating")} {t.averageRating}
         </li>
       </ul>
     </div>
@@ -101,12 +126,8 @@ export function Hero({
           <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
             {content}
             <div className="rounded-lg border border-white/10 bg-white p-6 shadow-xl md:p-8">
-              <h2 className="text-xl font-semibold text-charcoal">
-                Get Your Free Estimate
-              </h2>
-              <p className="mt-1 mb-6 text-sm text-muted-foreground">
-                We respond to every request within one business day.
-              </p>
+              <h2 className="text-xl font-semibold text-charcoal">{t.formHeading}</h2>
+              <p className="mt-1 mb-6 text-sm text-muted-foreground">{t.formSubheading}</p>
               {formSlot}
             </div>
           </div>

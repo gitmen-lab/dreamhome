@@ -9,12 +9,18 @@ interface CityCardProps {
   city: City;
   /** When set, links to the service+city page instead of the city page */
   service?: Service;
+  /**
+   * Defaults to "en". Plain city links (no `service`) point at the real
+   * Spanish city page. Service+city combo links (service set) still point
+   * at the English combo page — those 120 pages aren't translated yet.
+   */
+  locale?: "en" | "es";
 }
 
-export function CityCard({ city, service }: CityCardProps) {
+export function CityCard({ city, service, locale = "en" }: CityCardProps) {
   const href = service
     ? `/services/${service.slug}/${city.slug}`
-    : `/service-areas/${city.slug}`;
+    : `${locale === "es" ? "/es-mx" : ""}/service-areas/${city.slug}`;
 
   return (
     <Card className="group h-full transition-shadow hover:shadow-lg">
@@ -23,15 +29,17 @@ export function CityCard({ city, service }: CityCardProps) {
           <MapPin className="h-4 w-4 text-primary shrink-0" aria-hidden="true" />
           <h3 className="font-semibold text-charcoal">
             <Link href={href} className="after:absolute after:inset-0 relative">
-              {service ? `${service.shortName} in ${cityLabel(city)}` : cityLabel(city)}
+              {service
+                ? `${service.shortName} ${locale === "es" ? "en" : "in"} ${cityLabel(city)}`
+                : cityLabel(city)}
             </Link>
           </h3>
         </div>
         <p className="mt-1.5 text-xs text-muted-foreground">
-          {city.county} · Pop. {city.population}
+          {city.county} · {locale === "es" ? "Pob." : "Pop."} {city.population}
         </p>
         <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-primary">
-          View details
+          {locale === "es" ? "Ver detalles" : "View details"}
           <ArrowRight
             className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5"
             aria-hidden="true"

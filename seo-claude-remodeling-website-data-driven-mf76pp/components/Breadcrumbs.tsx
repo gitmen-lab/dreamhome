@@ -2,17 +2,24 @@ import Link from "next/link";
 import { ChevronRight, Home } from "lucide-react";
 import type { Crumb } from "@/lib/seo";
 
-export function Breadcrumbs({ crumbs }: { crumbs: Crumb[] }) {
+export function Breadcrumbs({
+  crumbs,
+  locale = "en",
+}: {
+  crumbs: Crumb[];
+  /** Defaults to "en". Only swaps this component's own hardcoded strings. */
+  locale?: "en" | "es";
+}) {
   return (
-    <nav aria-label="Breadcrumb" className="border-b bg-muted/50">
+    <nav aria-label={locale === "es" ? "Ruta de navegación" : "Breadcrumb"} className="border-b bg-muted/50">
       <ol className="container flex flex-wrap items-center gap-1.5 py-3 text-sm">
         <li>
           <Link
-            href="/"
+            href={locale === "es" ? "/es-mx" : "/"}
             className="flex items-center gap-1 text-muted-foreground hover:text-primary transition-colors"
           >
             <Home className="h-3.5 w-3.5" aria-hidden="true" />
-            Home
+            {locale === "es" ? "Inicio" : "Home"}
           </Link>
         </li>
         {crumbs.map((crumb, i) => {

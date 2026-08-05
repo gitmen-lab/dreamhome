@@ -10,13 +10,18 @@ interface ServiceCardProps {
   service: Service;
   /** When set, links to the service+city page instead of the service page */
   city?: City;
+  /** Defaults to "en". Swaps the href prefix and the "Learn more" label. */
+  locale?: "en" | "es";
 }
 
-export function ServiceCard({ service, city }: ServiceCardProps) {
+export function ServiceCard({ service, city, locale = "en" }: ServiceCardProps) {
+  const prefix = locale === "es" ? "/es-mx" : "";
   const href = city
-    ? `/services/${service.slug}/${city.slug}`
-    : `/services/${service.slug}`;
-  const label = city ? `${service.name} in ${cityLabel(city)}` : service.name;
+    ? `${prefix}/services/${service.slug}/${city.slug}`
+    : `${prefix}/services/${service.slug}`;
+  const label = city
+    ? `${service.name} ${locale === "es" ? "en" : "in"} ${cityLabel(city)}`
+    : service.name;
 
   return (
     <Card className="group h-full transition-shadow hover:shadow-lg">
@@ -33,7 +38,7 @@ export function ServiceCard({ service, city }: ServiceCardProps) {
           {service.shortDescription}
         </p>
         <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
-          Learn more
+          {locale === "es" ? "Ver más" : "Learn more"}
           <ArrowRight
             className="h-4 w-4 transition-transform group-hover:translate-x-1"
             aria-hidden="true"

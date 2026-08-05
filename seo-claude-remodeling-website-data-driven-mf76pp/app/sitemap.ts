@@ -12,7 +12,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
     { url: `${SITE_URL}/`, changeFrequency: "weekly", priority: 1 },
     { url: `${SITE_URL}/services`, changeFrequency: "weekly", priority: 0.9 },
-    { url: `${SITE_URL}/service-areas`, changeFrequency: "weekly", priority: 0.9 },
+    {
+      url: `${SITE_URL}/service-areas`,
+      changeFrequency: "weekly",
+      priority: 0.9,
+      alternates: { languages: { "es-MX": `${SITE_URL}/es-mx/service-areas` } },
+    },
     { url: `${SITE_URL}/about`, changeFrequency: "monthly", priority: 0.6 },
     { url: `${SITE_URL}/gallery`, changeFrequency: "weekly", priority: 0.6 },
     { url: `${SITE_URL}/reviews`, changeFrequency: "weekly", priority: 0.6 },
@@ -29,6 +34,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     { url: `${SITE_URL}/blog`, changeFrequency: "weekly", priority: 0.7 },
+    {
+      url: `${SITE_URL}/es-mx`,
+      changeFrequency: "weekly",
+      priority: 0.8,
+      alternates: { languages: { "en-US": `${SITE_URL}/` } },
+    },
+    {
+      url: `${SITE_URL}/es-mx/service-areas`,
+      changeFrequency: "weekly",
+      priority: 0.7,
+      alternates: { languages: { "en-US": `${SITE_URL}/service-areas` } },
+    },
   ];
 
   const blogPages: MetadataRoute.Sitemap = blogPosts.map((post) => ({
@@ -41,12 +58,36 @@ export default function sitemap(): MetadataRoute.Sitemap {
     url: `${SITE_URL}/services/${service.slug}`,
     changeFrequency: "weekly",
     priority: 0.9,
+    alternates: {
+      languages: { "es-MX": `${SITE_URL}/es-mx/services/${service.slug}` },
+    },
+  }));
+
+  const servicePagesEsMx: MetadataRoute.Sitemap = services.map((service) => ({
+    url: `${SITE_URL}/es-mx/services/${service.slug}`,
+    changeFrequency: "weekly",
+    priority: 0.8,
+    alternates: {
+      languages: { "en-US": `${SITE_URL}/services/${service.slug}` },
+    },
   }));
 
   const cityPages: MetadataRoute.Sitemap = cities.map((city) => ({
     url: `${SITE_URL}/service-areas/${city.slug}`,
     changeFrequency: "weekly",
     priority: 0.8,
+    alternates: {
+      languages: { "es-MX": `${SITE_URL}/es-mx/service-areas/${city.slug}` },
+    },
+  }));
+
+  const cityPagesEsMx: MetadataRoute.Sitemap = cities.map((city) => ({
+    url: `${SITE_URL}/es-mx/service-areas/${city.slug}`,
+    changeFrequency: "weekly",
+    priority: 0.75,
+    alternates: {
+      languages: { "en-US": `${SITE_URL}/service-areas/${city.slug}` },
+    },
   }));
 
   const serviceCityPages: MetadataRoute.Sitemap = services.flatMap((service) =>
@@ -57,5 +98,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }))
   );
 
-  return [...staticPages, ...servicePages, ...cityPages, ...serviceCityPages, ...blogPages];
+  return [
+    ...staticPages,
+    ...servicePages,
+    ...servicePagesEsMx,
+    ...cityPages,
+    ...cityPagesEsMx,
+    ...serviceCityPages,
+    ...blogPages,
+  ];
 }

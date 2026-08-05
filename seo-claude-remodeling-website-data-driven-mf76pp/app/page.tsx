@@ -27,6 +27,7 @@ export const metadata: Metadata = buildMetadata({
   title: `DFW Home Remodeling Contractor | Kitchens, Baths & More | ${company.name}`,
   description: `Kitchen & bathroom remodeling, painting, flooring, drywall repair & demolition across the DFW Metroplex. Licensed & insured, free estimates. Call ${company.phoneDisplay}.`,
   path: "/",
+  alternateLanguages: { "es-MX": "/es-mx" },
 });
 
 const homeProcess = [

@@ -12,6 +12,7 @@ export const metadata: Metadata = buildMetadata({
   title: `Service Areas — ${cities.length} DFW Cities | ${company.name}`,
   description: `${company.name} serves ${cities.length} communities across the Dallas–Fort Worth Metroplex, from Fort Worth and Arlington to Denton and Southlake. Find remodeling services in your city.`,
   path: "/service-areas",
+  alternateLanguages: { "es-MX": "/es-mx/service-areas" },
 });
 
 const crumbs = [{ name: "Service Areas", path: "/service-areas" }];

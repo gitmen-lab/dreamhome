@@ -7,49 +7,43 @@ import { usePathname } from "next/navigation";
 import { Menu, X, Phone, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { company } from "@/data/company";
-import { services } from "@/data/services";
+import { servicesEsMx } from "@/data/services.es-mx";
 import { telHref } from "@/lib/helpers";
 import { cn } from "@/lib/utils";
-import { STANDALONE_ROUTES } from "@/lib/standaloneRoutes";
-import { enToEs } from "@/lib/es-mx/pageMap";
+import { esToEn } from "@/lib/es-mx/pageMap";
 
-const navLinks = [
-  { href: "/about", label: "About" },
-  { href: "/blog", label: "Blog" },
-  { href: "/gallery", label: "Gallery" },
-  { href: "/reviews", label: "Reviews" },
-  { href: "/service-areas", label: "Service Areas" },
-  { href: "/contact", label: "Contact" },
-];
-
-export function Navbar() {
+/**
+ * Spanish header for the /es-mx pilot. Not locale-aware itself (unlike the
+ * shared component `locale` props elsewhere) -- this is a dedicated
+ * component only ever rendered by app/es-mx/layout.tsx, matching the real
+ * Navbar's structure so the two languages feel like the same site.
+ */
+export function NavbarEs() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
 
-  if (STANDALONE_ROUTES.includes(pathname) || pathname.startsWith("/es-mx")) {
-    return null;
-  }
-
-  const spanishHref = enToEs[pathname];
+  const englishHref = esToEn[pathname];
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80">
       <div className="container flex h-16 items-center justify-between">
-        <Link href="/" aria-label={`${company.name} home`} className="shrink-0">
-          <Image
-            src={company.logo}
-            alt={`${company.name} logo`}
-            width={600}
-            height={121}
-            className="h-10 w-auto rounded-md shadow-sm"
-            style={{ aspectRatio: "600 / 121" }}
-            priority
-          />
+        <Link href="/es-mx" aria-label={`${company.name} inicio`}>
+          <span className="flex shrink-0 items-center">
+            <Image
+              src={company.logo}
+              alt={`Logotipo de ${company.name}`}
+              width={600}
+              height={121}
+              className="h-10 w-auto rounded-md shadow-sm"
+              style={{ aspectRatio: "600 / 121" }}
+              priority
+            />
+          </span>
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden lg:flex items-center gap-6" aria-label="Main navigation">
+        <nav className="hidden lg:flex items-center gap-6" aria-label="Navegación principal">
           <div
             className="relative"
             onMouseEnter={() => setServicesOpen(true)}
@@ -61,21 +55,18 @@ export function Navbar() {
               aria-haspopup="true"
               onClick={() => setServicesOpen((v) => !v)}
             >
-              Services
+              Servicios
               <ChevronDown
-                className={cn(
-                  "h-4 w-4 transition-transform",
-                  servicesOpen && "rotate-180"
-                )}
+                className={cn("h-4 w-4 transition-transform", servicesOpen && "rotate-180")}
                 aria-hidden="true"
               />
             </button>
             {servicesOpen && (
               <div className="absolute left-0 top-full w-64 rounded-b-lg border bg-white shadow-lg py-2">
-                {services.map((service) => (
+                {servicesEsMx.map((service) => (
                   <Link
                     key={service.slug}
-                    href={`/services/${service.slug}`}
+                    href={`/es-mx/services/${service.slug}`}
                     className="block px-4 py-2.5 text-sm text-charcoal hover:bg-accent hover:text-primary transition-colors"
                     onClick={() => setServicesOpen(false)}
                   >
@@ -85,24 +76,21 @@ export function Navbar() {
               </div>
             )}
           </div>
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-sm font-medium text-charcoal hover:text-primary transition-colors"
-            >
-              {link.label}
-            </Link>
-          ))}
+          <Link
+            href="/es-mx/service-areas"
+            className="text-sm font-medium text-charcoal hover:text-primary transition-colors"
+          >
+            Áreas de Servicio
+          </Link>
         </nav>
 
         <div className="hidden lg:flex items-center gap-3">
-          {spanishHref && (
+          {englishHref && (
             <Link
-              href={spanishHref}
+              href={englishHref}
               className="text-sm font-semibold text-muted-foreground hover:text-primary transition-colors"
             >
-              ES
+              EN
             </Link>
           )}
           <a
@@ -113,7 +101,7 @@ export function Navbar() {
             {company.phoneDisplay}
           </a>
           <Button asChild>
-            <Link href="/contact">Free Estimate</Link>
+            <Link href="/contact">Cotización Gratis</Link>
           </Button>
         </div>
 
@@ -122,7 +110,7 @@ export function Navbar() {
           className="lg:hidden p-2 text-charcoal"
           onClick={() => setOpen(!open)}
           aria-expanded={open}
-          aria-label={open ? "Close menu" : "Open menu"}
+          aria-label={open ? "Cerrar menú" : "Abrir menú"}
         >
           {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
@@ -132,15 +120,15 @@ export function Navbar() {
       {open && (
         <nav
           className="lg:hidden border-t bg-white px-4 pb-6 pt-2 max-h-[calc(100vh-4rem)] overflow-y-auto"
-          aria-label="Mobile navigation"
+          aria-label="Navegación móvil"
         >
           <p className="px-1 pt-2 pb-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-            Services
+            Servicios
           </p>
-          {services.map((service) => (
+          {servicesEsMx.map((service) => (
             <Link
               key={service.slug}
-              href={`/services/${service.slug}`}
+              href={`/es-mx/services/${service.slug}`}
               className="block rounded-md px-3 py-2.5 text-sm font-medium text-charcoal hover:bg-accent"
               onClick={() => setOpen(false)}
             >
@@ -148,25 +136,22 @@ export function Navbar() {
             </Link>
           ))}
           <div className="my-2 border-t" />
-          {spanishHref && (
+          <Link
+            href="/es-mx/service-areas"
+            className="block rounded-md px-3 py-2.5 text-sm font-medium text-charcoal hover:bg-accent"
+            onClick={() => setOpen(false)}
+          >
+            Áreas de Servicio
+          </Link>
+          {englishHref && (
             <Link
-              href={spanishHref}
+              href={englishHref}
               className="block rounded-md px-3 py-2.5 text-sm font-medium text-charcoal hover:bg-accent"
               onClick={() => setOpen(false)}
             >
-              Español
+              English
             </Link>
           )}
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="block rounded-md px-3 py-2.5 text-sm font-medium text-charcoal hover:bg-accent"
-              onClick={() => setOpen(false)}
-            >
-              {link.label}
-            </Link>
-          ))}
           <div className="mt-4 flex flex-col gap-3">
             <a
               href={telHref(company.phone)}
@@ -177,7 +162,7 @@ export function Navbar() {
             </a>
             <Button asChild className="w-full">
               <Link href="/contact" onClick={() => setOpen(false)}>
-                Get a Free Estimate
+                Solicitar Cotización Gratis
               </Link>
             </Button>
           </div>

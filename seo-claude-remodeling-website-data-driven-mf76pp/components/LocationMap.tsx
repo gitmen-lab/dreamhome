@@ -5,7 +5,8 @@ import { company } from "@/data/company";
  * business's real location. No JS required — safe as a Server Component.
  * Wrapped in a padding-bottom box so it never causes layout shift.
  */
-export function LocationMap() {
+/** Defaults to "en". Only swaps the iframe's title attribute. */
+export function LocationMap({ locale = "en" }: { locale?: "en" | "es" }) {
   return (
     <div
       className="relative w-full overflow-hidden rounded-lg border shadow-sm"
@@ -17,7 +18,11 @@ export function LocationMap() {
         loading="lazy"
         allowFullScreen
         referrerPolicy="strict-origin-when-cross-origin"
-        title={`${company.name} location in Fort Worth, TX`}
+        title={
+          locale === "es"
+            ? `Ubicación de ${company.name} en Fort Worth, TX`
+            : `${company.name} location in Fort Worth, TX`
+        }
       />
     </div>
   );

@@ -1,44 +1,37 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { Phone, Mail, MapPin } from "lucide-react";
 import { company } from "@/data/company";
-import { services } from "@/data/services";
-import { cities } from "@/data/cities";
-import { telHref, cityLabel } from "@/lib/helpers";
-import { STANDALONE_ROUTES } from "@/lib/standaloneRoutes";
+import { companyEsMx } from "@/data/company.es-mx";
+import { servicesEsMx } from "@/data/services.es-mx";
+import { telHref } from "@/lib/helpers";
 
-export function Footer() {
-  const pathname = usePathname();
+/**
+ * Spanish footer for the /es-mx pilot -- dedicated component (not a locale
+ * prop on the real Footer) so it's only ever rendered by app/es-mx/layout.tsx.
+ * Real NAP data (phone/address/hours) comes straight from data/company.ts;
+ * only the display strings come from data/company.es-mx.ts.
+ */
+export function FooterEs() {
   const year = new Date().getFullYear();
-
-  if (STANDALONE_ROUTES.includes(pathname) || pathname.startsWith("/es-mx")) {
-    return null;
-  }
 
   return (
     <footer className="bg-charcoal-dark text-gray-300">
       <div className="container section-padding">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
-          {/* Brand */}
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
           <div>
-            <Link href="/" aria-label={`${company.name} home`}>
+            <Link href="/es-mx" aria-label={`${company.name} inicio`}>
               <Image
                 src={company.logo}
-                alt={`${company.name} logo`}
+                alt={`Logotipo de ${company.name}`}
                 width={600}
                 height={121}
-                className="h-10 w-auto shrink-0 rounded-md"
+                className="h-10 w-auto"
                 style={{ aspectRatio: "600 / 121" }}
               />
             </Link>
-            <p className="mt-4 text-sm leading-relaxed">{company.tagline}</p>
-            <p className="mt-4 text-sm">
-              {company.license}
-              {company.licenseNumber ? ` — License #${company.licenseNumber}` : ""}
-            </p>
+            <p className="mt-4 text-sm leading-relaxed">{companyEsMx.tagline}</p>
+            <p className="mt-4 text-sm">{companyEsMx.license}</p>
             <ul className="mt-6 space-y-3 text-sm">
               <li>
                 <a
@@ -69,16 +62,15 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Services */}
-          <nav aria-label="Footer services">
+          <nav aria-label="Servicios en el pie de página">
             <h2 className="text-sm font-semibold uppercase tracking-wider text-white">
-              Services
+              Servicios
             </h2>
             <ul className="mt-4 space-y-2.5 text-sm">
-              {services.map((service) => (
+              {servicesEsMx.map((service) => (
                 <li key={service.slug}>
                   <Link
-                    href={`/services/${service.slug}`}
+                    href={`/es-mx/services/${service.slug}`}
                     className="hover:text-white transition-colors"
                   >
                     {service.name}
@@ -88,65 +80,29 @@ export function Footer() {
             </ul>
           </nav>
 
-          {/* Service areas */}
-          <nav aria-label="Footer service areas">
+          <nav aria-label="Enlaces de la empresa">
             <h2 className="text-sm font-semibold uppercase tracking-wider text-white">
-              Service Areas
-            </h2>
-            <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2.5 text-sm">
-              {cities.slice(0, 12).map((city) => (
-                <li key={city.slug}>
-                  <Link
-                    href={`/service-areas/${city.slug}`}
-                    className="hover:text-white transition-colors"
-                  >
-                    {cityLabel(city)}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <Link
-              href="/service-areas"
-              className="mt-3 inline-block text-sm font-medium text-blue-300 hover:text-white transition-colors"
-            >
-              View all {cities.length} cities →
-            </Link>
-          </nav>
-
-          {/* Company */}
-          <nav aria-label="Footer company links">
-            <h2 className="text-sm font-semibold uppercase tracking-wider text-white">
-              Company
+              Empresa
             </h2>
             <ul className="mt-4 space-y-2.5 text-sm">
               <li>
-                <Link href="/about" className="hover:text-white transition-colors">
-                  About Us
+                <Link href="/es-mx/service-areas" className="hover:text-white transition-colors">
+                  Áreas de Servicio
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="hover:text-white transition-colors">
-                  Blog
-                </Link>
-              </li>
-              <li>
-                <Link href="/gallery" className="hover:text-white transition-colors">
-                  Project Gallery
-                </Link>
-              </li>
-              <li>
-                <Link href="/reviews" className="hover:text-white transition-colors">
-                  Customer Reviews
+                <Link href="/" className="hover:text-white transition-colors">
+                  Sitio en Inglés
                 </Link>
               </li>
               <li>
                 <Link href="/contact" className="hover:text-white transition-colors">
-                  Contact & Free Estimates
+                  Contacto y Cotizaciones Gratis
                 </Link>
               </li>
             </ul>
             <h2 className="mt-8 text-sm font-semibold uppercase tracking-wider text-white">
-              Hours
+              Horario
             </h2>
             <ul className="mt-4 space-y-1.5 text-sm">
               {company.hours.map((h) => (
@@ -160,13 +116,8 @@ export function Footer() {
         </div>
 
         <div className="mt-12 border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-400">
-          <p>
-            © {year} {company.legalName}. All rights reserved. ·{" "}
-            <Link href="/privacy-policy" className="hover:text-white transition-colors">
-              Privacy Policy
-            </Link>
-          </p>
-          <p>{company.license} · Serving the {company.serviceRadius}</p>
+          <p>© {year} {company.legalName}. Todos los derechos reservados.</p>
+          <p>{companyEsMx.license}</p>
         </div>
       </div>
     </footer>

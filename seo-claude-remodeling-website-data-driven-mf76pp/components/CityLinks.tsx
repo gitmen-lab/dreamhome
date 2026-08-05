@@ -9,12 +9,15 @@ interface CityLinksProps {
   /** When set, links go to service+city pages */
   service?: Service;
   heading?: string;
+  /** Defaults to "en". Swaps the href prefix and the "in"/"en" connector word. */
+  locale?: "en" | "es";
 }
 
 /** Compact internal-linking block listing cities (optionally scoped to a service). */
-export function CityLinks({ cities, service, heading }: CityLinksProps) {
+export function CityLinks({ cities, service, heading, locale = "en" }: CityLinksProps) {
+  const prefix = locale === "es" ? "/es-mx" : "";
   return (
-    <nav aria-label={heading ?? "Cities we serve"}>
+    <nav aria-label={heading ?? (locale === "es" ? "Ciudades que atendemos" : "Cities we serve")}>
       {heading && (
         <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-charcoal">
           {heading}
@@ -26,13 +29,15 @@ export function CityLinks({ cities, service, heading }: CityLinksProps) {
             <Link
               href={
                 service
-                  ? `/services/${service.slug}/${city.slug}`
-                  : `/service-areas/${city.slug}`
+                  ? `${prefix}/services/${service.slug}/${city.slug}`
+                  : `${prefix}/service-areas/${city.slug}`
               }
               className="inline-flex items-center gap-1.5 rounded-full border bg-card px-4 py-2 text-sm font-medium text-charcoal transition-colors hover:border-primary hover:text-primary"
             >
               <MapPin className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
-              {service ? `${service.shortName} in ${cityLabel(city)}` : cityLabel(city)}
+              {service
+                ? `${service.shortName} ${locale === "es" ? "en" : "in"} ${cityLabel(city)}`
+                : cityLabel(city)}
             </Link>
           </li>
         ))}

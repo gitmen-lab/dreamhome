@@ -8,12 +8,15 @@ interface CTASectionProps {
   heading?: string;
   body?: string;
   buttonLabel?: string;
+  /** Defaults to "en". Only swaps this component's own hardcoded "Call " prefix. */
+  locale?: "en" | "es";
 }
 
 export function CTASection({
   heading = "Ready to Transform Your Home?",
   body = `Get a free, no-obligation estimate from ${company.name}. Transparent pricing, licensed crews, and a workmanship warranty on every project.`,
   buttonLabel = "Get a Free Estimate",
+  locale = "en",
 }: CTASectionProps) {
   return (
     <section className="bg-primary text-white">
@@ -33,7 +36,7 @@ export function CTASection({
             >
               <a href={telHref(company.phone)}>
                 <Phone className="h-5 w-5" aria-hidden="true" />
-                Call {company.phoneDisplay}
+                {locale === "es" ? `Llame al ${company.phoneDisplay}` : `Call ${company.phoneDisplay}`}
               </a>
             </Button>
           </div>

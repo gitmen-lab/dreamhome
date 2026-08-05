@@ -45,7 +45,7 @@ function convexHull(points: [number, number][]): [number, number][] {
   return [...lower, ...upper];
 }
 
-export default function ServiceAreaMapInner() {
+export default function ServiceAreaMapInner({ locale = "en" }: { locale?: "en" | "es" }) {
   const points = useMemo<[number, number][]>(
     () => cities.map((c) => [c.coordinates.lat, c.coordinates.lng]),
     []
@@ -86,10 +86,12 @@ export default function ServiceAreaMapInner() {
                 <p className="font-semibold text-charcoal">{cityLabel(city)}</p>
                 <p className="text-xs text-muted-foreground">{city.county}</p>
                 <Link
-                  href={`/service-areas/${city.slug}`}
+                  href={`${locale === "es" ? "/es-mx" : ""}/service-areas/${city.slug}`}
                   className="mt-1 inline-block text-xs font-semibold text-primary underline"
                 >
-                  View services in {city.city} &rarr;
+                  {locale === "es"
+                    ? `Ver servicios en ${city.city} →`
+                    : `View services in ${city.city} →`}
                 </Link>
               </div>
             </Popup>

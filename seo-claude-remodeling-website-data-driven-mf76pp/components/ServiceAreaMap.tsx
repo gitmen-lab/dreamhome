@@ -11,6 +11,7 @@ const ServiceAreaMapInner = dynamic(() => import("./ServiceAreaMapInner"), {
   ),
 });
 
-export function ServiceAreaMap() {
-  return <ServiceAreaMapInner />;
+/** Defaults to "en". Only swaps the popup's "View services in" label. */
+export function ServiceAreaMap({ locale = "en" }: { locale?: "en" | "es" }) {
+  return <ServiceAreaMapInner locale={locale} />;
 }

@@ -20,22 +20,49 @@ interface PageMeta {
   description: string;
   path: string;
   image?: string;
+  /** Defaults to "en_US". Set "es_MX" on the /es-mx pilot pages. */
+  locale?: "en_US" | "es_MX";
+  /**
+   * hreflang cross-links to a real alternate-language version of this exact
+   * page, e.g. { "es-MX": "/es-mx/services/bathroom-remodeling" } on the
+   * English page, or { "en-US": "/services/bathroom-remodeling" } on its
+   * Spanish counterpart. Only set this when a real translated page exists —
+   * see lib/es-mx/pageMap.ts.
+   */
+  alternateLanguages?: Record<string, string>;
 }
 
-export function buildMetadata({ title, description, path, image }: PageMeta): Metadata {
+export function buildMetadata({
+  title,
+  description,
+  path,
+  image,
+  locale = "en_US",
+  alternateLanguages,
+}: PageMeta): Metadata {
   const url = `${SITE_URL}${path}`;
   const ogImage = image ?? "/images/og-default.jpg";
   return {
     title,
     description,
-    alternates: { canonical: url },
+    alternates: {
+      canonical: url,
+      ...(alternateLanguages && {
+        languages: Object.fromEntries(
+          Object.entries(alternateLanguages).map(([lang, altPath]) => [
+            lang,
+            `${SITE_URL}${altPath}`,
+          ])
+        ),
+      }),
+    },
     openGraph: {
       title,
       description,
       url,
       siteName: company.name,
       type: "website",
-      locale: "en_US",
+      locale,
       images: [{ url: `${SITE_URL}${ogImage}`, width: 1200, height: 630, alt: title }],
     },
     twitter: {
@@ -53,6 +80,7 @@ export function serviceMetadata(service: Service): Metadata {
     description: `${service.shortDescription} Free estimates across the DFW Metroplex. Licensed & insured. Call ${company.phoneDisplay}.`,
     path: `/services/${service.slug}`,
     image: service.image,
+    alternateLanguages: { "es-MX": `/es-mx/services/${service.slug}` },
   });
 }
 
@@ -61,6 +89,17 @@ export function cityMetadata(city: City): Metadata {
     title: `Home Remodeling in ${cityLabel(city)} | ${company.name}`,
     description: `Trusted remodeling contractor serving ${cityLabel(city)} and ${city.county}: kitchens, bathrooms, painting, flooring, drywall & demolition. Free estimates — call ${company.phoneDisplay}.`,
     path: `/service-areas/${city.slug}`,
+    alternateLanguages: { "es-MX": `/es-mx/service-areas/${city.slug}` },
+  });
+}
+
+export function cityMetadataEsMx(city: City): Metadata {
+  return buildMetadata({
+    title: `Remodelación de Casas en ${cityLabel(city)} | ${company.name}`,
+    description: `Contratista de remodelación de confianza sirviendo a ${cityLabel(city)} y ${city.county}: cocinas, baños, pintura, pisos, tablaroca y demolición. Cotizaciones gratuitas — llame al ${company.phoneDisplay}.`,
+    path: `/es-mx/service-areas/${city.slug}`,
+    locale: "es_MX",
+    alternateLanguages: { "en-US": `/service-areas/${city.slug}` },
   });
 }
 
