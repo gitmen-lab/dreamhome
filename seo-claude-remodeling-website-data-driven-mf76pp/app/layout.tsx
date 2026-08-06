@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Script from "next/script";
 import { Inter } from "next/font/google";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { FloatingContactButton } from "@/components/FloatingContactButton";
 import { JsonLd } from "@/components/JsonLd";
 import { organizationSchema, localBusinessSchema, websiteSchema, SITE_URL } from "@/lib/seo";
 import { company } from "@/data/company";
@@ -66,12 +66,7 @@ gtag('config', 'G-SZN03QS8DJ');`,
           {children}
         </main>
         <Footer />
-        <Script
-          src="https://widgets.leadconnectorhq.com/loader.js"
-          data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
-          data-widget-id="6a6f912ff2c8668b1b416883"
-          strategy="lazyOnload"
-        />
+        <FloatingContactButton />
       </body>
     </html>
   );

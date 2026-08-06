@@ -40,7 +40,7 @@ All site content lives in `/data`:
 
 ### Conventions
 
-- Server Components by default; the only `"use client"` files are `Navbar`, `ContactForm`, `AnimateIn` (Framer Motion via LazyMotion), and `ui/accordion`.
+- Server Components by default; the only `"use client"` files are `Navbar`, `Footer`, `FloatingContactButton`, `ContactForm`, `AnimateIn` (Framer Motion via LazyMotion), and `ui/accordion`.
 - shadcn/ui-style primitives are hand-maintained in `components/ui/` (no shadcn CLI config).
 - Images are placeholder SVGs in `public/images/` (hence `dangerouslyAllowSVG` in `next.config.ts`); replace with real photos and update paths in the data files.
 - `ContactForm` simulates submission — wire it to a real backend before production.
