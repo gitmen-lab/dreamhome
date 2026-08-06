@@ -37,7 +37,11 @@ export default function RootLayout({
         static markup in the server-rendered <head> -- required for Google
         Search Console's "Google Analytics" domain-verification method,
         which scans raw HTML and won't see anything next/script injects at
-        runtime, even with strategy="beforeInteractive".
+        runtime, even with strategy="beforeInteractive". gtag.js is loaded
+        once and configured for both GA4 (G-SZN03QS8DJ) and Google Ads
+        conversion tracking (AW-18358748702) -- per Google's own guidance,
+        a second product just adds another gtag('config', ...) call rather
+        than loading gtag.js a second time.
       */}
       <head>
         <script
@@ -49,7 +53,8 @@ export default function RootLayout({
             __html: `window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
-gtag('config', 'G-SZN03QS8DJ');`,
+gtag('config', 'G-SZN03QS8DJ');
+gtag('config', 'AW-18358748702');`,
           }}
         />
       </head>
