@@ -23,12 +23,12 @@ export function CityCard({ city, service, locale = "en" }: CityCardProps) {
     : `${locale === "es" ? "/es-mx" : ""}/service-areas/${city.slug}`;
 
   return (
-    <Card className="group h-full transition-shadow hover:shadow-lg">
+    <Card className="group relative h-full transition-shadow hover:shadow-lg">
       <CardContent className="flex h-full flex-col p-5">
         <div className="flex items-center gap-2">
           <MapPin className="h-4 w-4 text-primary shrink-0" aria-hidden="true" />
           <h3 className="font-semibold text-charcoal">
-            <Link href={href} className="after:absolute after:inset-0 relative">
+            <Link href={href} className="after:absolute after:inset-0">
               {service
                 ? `${service.shortName} ${locale === "es" ? "en" : "in"} ${cityLabel(city)}`
                 : cityLabel(city)}

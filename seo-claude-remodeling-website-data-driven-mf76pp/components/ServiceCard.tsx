@@ -24,13 +24,13 @@ export function ServiceCard({ service, city, locale = "en" }: ServiceCardProps) 
     : service.name;
 
   return (
-    <Card className="group h-full transition-shadow hover:shadow-lg">
+    <Card className="group relative h-full transition-shadow hover:shadow-lg">
       <CardContent className="flex h-full flex-col p-6">
         <span className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-accent text-primary">
           <ServiceIcon name={service.icon} className="h-6 w-6" />
         </span>
         <h3 className="text-lg font-semibold text-charcoal">
-          <Link href={href} className="after:absolute after:inset-0 relative">
+          <Link href={href} className="after:absolute after:inset-0">
             {label}
           </Link>
         </h3>
