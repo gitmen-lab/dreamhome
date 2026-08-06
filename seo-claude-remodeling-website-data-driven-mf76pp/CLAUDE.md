@@ -43,5 +43,5 @@ All site content lives in `/data`:
 - Server Components by default; the only `"use client"` files are `Navbar`, `Footer`, `FloatingContactButton`, `ContactForm`, `AnimateIn` (Framer Motion via LazyMotion), and `ui/accordion`.
 - shadcn/ui-style primitives are hand-maintained in `components/ui/` (no shadcn CLI config).
 - Images are placeholder SVGs in `public/images/` (hence `dangerouslyAllowSVG` in `next.config.ts`); replace with real photos and update paths in the data files.
-- `ContactForm` posts to `app/api/contact/route.ts`, which sends the submission via Resend. Requires `RESEND_API_KEY` (and optionally `CONTACT_TO_EMAIL`) to be set wherever the app actually runs — a local `.env` alone won't reach a separately-hosted deployment.
+- `ContactForm` posts directly from the browser to Web3Forms (`https://api.web3forms.com/submit`) — no backend route, no server env vars. The access key in the component is meant to be public (tied to the destination inbox, not a secret); rotate it at web3forms.com if it's ever abused.
 - `app/sitemap.ts` and `app/robots.ts` generate sitemap.xml/robots.txt from the same data files.

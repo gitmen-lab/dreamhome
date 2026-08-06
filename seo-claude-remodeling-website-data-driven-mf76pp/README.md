@@ -60,6 +60,5 @@ Business name, phone, address, and domain are already set in `data/company.ts`. 
 2. Replace the placeholder stats (`stats`, founded year, "2,400+ projects", "4.9★" claims) with real numbers — they appear on the home, about, and hero sections
 3. Replace the illustrative testimonials in `data/testimonials.ts` with real customer reviews
 4. Replace placeholder SVGs in `public/images/` with real project photos
-5. Wire `components/ContactForm.tsx` to a form backend (API route, Formspree, Resend, …)
-6. Add real social profile URLs to `company.social` (feeds schema.org `sameAs`)
-7. Once real review data exists, optionally add an `aggregateRating` back to `localBusinessSchema()` in `lib/seo.ts` — it was intentionally left out to avoid fabricated-rating penalties
+5. Add real social profile URLs to `company.social` (feeds schema.org `sameAs`)
+6. Once real review data exists, optionally add an `aggregateRating` back to `localBusinessSchema()` in `lib/seo.ts` — it was intentionally left out to avoid fabricated-rating penalties

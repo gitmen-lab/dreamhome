@@ -12,6 +12,15 @@ interface ContactFormProps {
   locale?: "en" | "es";
 }
 
+/**
+ * Web3Forms access key -- tied to the destination inbox
+ * (yojainier@mydreamhomeremodeling.com), not a server secret. It's meant to
+ * be public/embedded in client-side code exactly like this: the form posts
+ * straight from the browser to Web3Forms, with no backend or env vars
+ * needed. Get/rotate it at https://web3forms.com.
+ */
+const WEB3FORMS_ACCESS_KEY = "59d303e3-8988-492f-a92f-aca15fa65dd6";
+
 const STRINGS = {
   en: {
     formLabel: "Free estimate request",
@@ -64,15 +73,19 @@ export function ContactForm({ locale = "en" }: ContactFormProps) {
     const payload = Object.fromEntries(formData.entries()) as Record<string, string>;
 
     try {
-      const response = await fetch("/api/contact", {
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: `New estimate request from ${payload.name}`,
+          ...payload,
+        }),
       });
 
-      if (!response.ok) {
-        const body = await response.json().catch(() => null);
-        throw new Error(body?.error ?? response.statusText ?? t.submissionFailed);
+      const body = await response.json().catch(() => null);
+      if (!response.ok || !body?.success) {
+        throw new Error(body?.message ?? t.submissionFailed);
       }
 
       setStatus("success");
