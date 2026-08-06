@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import { Hero } from "@/components/Hero";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ProcessSteps } from "@/components/ProcessSteps";
@@ -13,7 +14,17 @@ import { CTASection } from "@/components/CTASection";
 import { ServiceLinks } from "@/components/ServiceLinks";
 import { CityLinks } from "@/components/CityLinks";
 import { JsonLd } from "@/components/JsonLd";
-import { CheckCircle2, MapPin, Clock, Phone } from "lucide-react";
+import {
+  CheckCircle2,
+  MapPin,
+  Clock,
+  Phone,
+  FileText,
+  Home as HomeIcon,
+  ShieldCheck,
+  CloudRain,
+  Quote,
+} from "lucide-react";
 import {
   serviceCityMetadata,
   serviceSchema,
@@ -27,16 +38,25 @@ import {
   generateServiceIntro,
   generateFAQs,
   generateCTA,
-  generateAreasWeServe,
+  getLocalFacts,
+  type LocalFact,
 } from "@/lib/content";
 import {
   getRelatedServices,
   getNearbyCities,
+  getCityProjectReference,
   cityLabel,
   telHref,
 } from "@/lib/helpers";
 import { getTestimonialsByService, getTestimonialsByCity } from "@/data/testimonials";
 import { company } from "@/data/company";
+
+const LOCAL_FACT_ICONS: Record<string, typeof FileText> = {
+  Permits: FileText,
+  "Typical build era": HomeIcon,
+  "HOA considerations": ShieldCheck,
+  "Climate & soil": CloudRain,
+};
 
 interface Params {
   service: string;
@@ -79,6 +99,8 @@ export default async function ServiceCityPage({
   const cta = generateCTA(service, city);
   const relatedServices = getRelatedServices(service.slug, 5);
   const nearbyCities = getNearbyCities(city.slug);
+  const localFacts = getLocalFacts(city);
+  const featuredProject = getCityProjectReference(city.slug, service.slug);
 
   // Prefer testimonials matching this city+service, then this service, then this city.
   const cityServiceTestimonials = getTestimonialsByCity(city.slug).filter(
@@ -89,6 +111,8 @@ export default async function ServiceCityPage({
       ? cityServiceTestimonials
       : [...getTestimonialsByService(service.slug), ...getTestimonialsByCity(city.slug)];
   const pageTestimonials = testimonialPool
+    // Drop the one already shown as the featured project above, so it isn't repeated.
+    .filter((t) => t !== featuredProject)
     .filter((t, i, arr) => arr.indexOf(t) === i)
     .slice(0, 3);
 
@@ -174,6 +198,97 @@ export default async function ServiceCityPage({
           </div>
         </div>
       </section>
+
+      {/* Local facts -- real, verified per-city data only; renders nothing until data/cities.ts has real values (see TODOs there). */}
+      {localFacts.length > 0 && (
+        <section className="container section-padding" aria-labelledby="local-facts-heading">
+          <h2
+            id="local-facts-heading"
+            className="text-3xl md:text-4xl font-bold tracking-tight text-charcoal"
+          >
+            What to Know Before You Remodel in {city.city}
+          </h2>
+          <div className="mt-8 grid gap-6 sm:grid-cols-2">
+            {localFacts.map((fact: LocalFact) => {
+              const Icon = LOCAL_FACT_ICONS[fact.label] ?? FileText;
+              return (
+                <div key={fact.label} className="flex gap-4 rounded-lg border bg-card p-6">
+                  <Icon className="h-6 w-6 text-primary shrink-0 mt-0.5" aria-hidden="true" />
+                  <div>
+                    <h3 className="font-semibold text-charcoal">{fact.label}</h3>
+                    <p className="mt-1.5 text-sm text-muted-foreground leading-relaxed">
+                      {fact.value}
+                    </p>
+                    {fact.url && (
+                      <a
+                        href={fact.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-1.5 inline-block text-sm font-semibold text-primary hover:underline"
+                      >
+                        View permit portal
+                      </a>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      )}
+
+      {/* Featured local project -- a real testimonial tied to this exact city, used as proof instead of generic copy. Absent (not fabricated) for cities with no testimonial yet. */}
+      {featuredProject && (
+        <section className="container section-padding" aria-labelledby="featured-project-heading">
+          <h2
+            id="featured-project-heading"
+            className="text-3xl md:text-4xl font-bold tracking-tight text-charcoal"
+          >
+            A Recent {city.city} Project
+          </h2>
+          <Card className="mt-8">
+            <CardContent className="flex flex-col gap-4 p-6 sm:flex-row sm:items-start">
+              <Quote className="h-8 w-8 text-primary/20 shrink-0" aria-hidden="true" />
+              <div>
+                <blockquote className="text-charcoal leading-relaxed">
+                  &ldquo;{featuredProject.text}&rdquo;
+                </blockquote>
+                <footer className="mt-3">
+                  <p className="text-sm font-semibold text-charcoal">{featuredProject.name}</p>
+                  <p className="text-xs text-muted-foreground">
+                    {featuredProject.project} · {cityLabel(city)}
+                  </p>
+                </footer>
+              </div>
+            </CardContent>
+          </Card>
+        </section>
+      )}
+
+      {/* Coverage details (neighborhoods, zips, landmarks) live on the city hub -- link there instead of repeating them. */}
+      <section className="bg-muted" aria-labelledby="areas-heading">
+        <div className="container section-padding">
+          <h2
+            id="areas-heading"
+            className="text-3xl md:text-4xl font-bold tracking-tight text-charcoal"
+          >
+            Areas We Serve in {city.city}
+          </h2>
+          <p className="mt-6 text-muted-foreground leading-relaxed max-w-3xl">
+            This {service.name.toLowerCase()} team covers all of {city.city} and {city.county}.
+            For the full list of neighborhoods, zip codes, and landmarks we serve here, see our{" "}
+            <Link
+              href={`/service-areas/${city.slug}`}
+              className="font-semibold text-primary hover:underline"
+            >
+              {cityLabel(city)} service area page
+            </Link>
+            .
+          </p>
+        </div>
+      </section>
+
+      {/* Shared boilerplate below this point -- identical across every city for this service. */}
 
       {service.subServices && service.subServices.length > 0 && (
         <section className="container section-padding" aria-labelledby="subservices-heading">
@@ -276,20 +391,6 @@ export default async function ServiceCityPage({
           </div>
         </section>
       )}
-
-      <section className="bg-muted" aria-labelledby="areas-heading">
-        <div className="container section-padding">
-          <h2
-            id="areas-heading"
-            className="text-3xl md:text-4xl font-bold tracking-tight text-charcoal"
-          >
-            Areas We Serve in {city.city}
-          </h2>
-          <p className="mt-6 text-muted-foreground leading-relaxed max-w-3xl">
-            {generateAreasWeServe(city)}
-          </p>
-        </div>
-      </section>
 
       {pageTestimonials.length > 0 && (
         <Testimonials

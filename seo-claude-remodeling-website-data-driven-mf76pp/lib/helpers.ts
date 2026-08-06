@@ -1,6 +1,7 @@
 import { services, type Service } from "@/data/services";
 import { cities, getCity, type City } from "@/data/cities";
 import { company } from "@/data/company";
+import { getTestimonialsByCity, type Testimonial } from "@/data/testimonials";
 
 /**
  * Deterministic hash used to pick content variants per service+city combo.
@@ -70,4 +71,21 @@ export function cityLabel(city: City): string {
 /** Format a phone number for tel: links */
 export function telHref(phone: string): string {
   return `tel:${phone.replace(/[^+\d]/g, "")}`;
+}
+
+/**
+ * The real testimonial to feature as a city's "project reference" on its
+ * service+city pages -- prefers an exact service match, falls back to any
+ * other real project in that city, and returns undefined (never a fabricated
+ * placeholder) for cities with no testimonial yet.
+ */
+export function getCityProjectReference(
+  citySlug: string,
+  serviceSlug: string
+): Testimonial | undefined {
+  const cityTestimonials = getTestimonialsByCity(citySlug);
+  if (cityTestimonials.length === 0) return undefined;
+  return (
+    cityTestimonials.find((t) => t.serviceSlug === serviceSlug) ?? cityTestimonials[0]
+  );
 }

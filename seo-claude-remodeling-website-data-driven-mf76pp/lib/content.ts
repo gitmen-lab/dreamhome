@@ -70,9 +70,15 @@ export function generateNearMeFaq(service: Service): ServiceFAQ {
   };
 }
 
-/** City-specific FAQs generated for a service+city page, merged with the service's own FAQs. */
+/**
+ * City-specific FAQs for a service+city page. Deliberately just these 2,
+ * local-data-driven entries -- the service's own 4 generic FAQs already live
+ * on the parent /services/[service] page (see service.faqs there), so
+ * repeating them here byte-for-byte on all 120 city pages was pure doorway-
+ * page boilerplate.
+ */
 export function generateFAQs(service: Service, city: City): ServiceFAQ[] {
-  const localFaqs: ServiceFAQ[] = [
+  return [
     {
       question: `Do you offer ${service.name.toLowerCase()} near me in ${cityLabel(city)}?`,
       answer: `Yes. We work all of ${city.city}, including the ${city.zipCodes.slice(0, 4).join(", ")} zip code${city.zipCodes.length > 1 ? "s" : ""}, plus surrounding ${city.county} communities. On-site estimates here are always free.`,
@@ -81,12 +87,45 @@ export function generateFAQs(service: Service, city: City): ServiceFAQ[] {
       question: `How much does ${service.name.toLowerCase()} cost in ${city.city}?`,
       answer: `Depends on your home's size, condition, and material choices — ${city.city} homes are typically ${city.housingNote}, and we factor that into every quote. Typical timeline: ${service.duration}. You get a free, line-item estimate before anything starts, so the cost is never a surprise.`,
     },
-    {
-      question: `Are you licensed to work in ${city.city}?`,
-      answer: `Yes. Licensed and insured across Texas. We pull any permits ${city.city} or ${city.county} requires and schedule the inspections.`,
-    },
   ];
-  return [...localFaqs, ...service.faqs];
+}
+
+export interface LocalFact {
+  label: string;
+  value: string;
+  url?: string;
+}
+
+/**
+ * Real, verified local facts for a city (permits, HOA, climate/soil, build
+ * era) — pulled straight from data/cities.ts. Only returns entries whose
+ * underlying field has actually been filled in; never pads with generic
+ * boilerplate, so a city with no verified facts yet renders nothing here.
+ */
+export function getLocalFacts(city: City): LocalFact[] {
+  const facts: LocalFact[] = [];
+  if (city.permitOffice) {
+    facts.push({
+      label: "Permits",
+      value: city.permitProcessNote
+        ? `${city.permitOffice} — ${city.permitProcessNote}`
+        : city.permitOffice,
+      url: city.permitUrl,
+    });
+  }
+  if (city.buildEra) {
+    facts.push({
+      label: "Typical build era",
+      value: `Most ${city.city} homes we work on date to the ${city.buildEra}.`,
+    });
+  }
+  if (city.hoaNote) {
+    facts.push({ label: "HOA considerations", value: city.hoaNote });
+  }
+  if (city.climateSoilNote) {
+    facts.push({ label: "Climate & soil", value: city.climateSoilNote });
+  }
+  return facts;
 }
 
 export interface CTAContent {

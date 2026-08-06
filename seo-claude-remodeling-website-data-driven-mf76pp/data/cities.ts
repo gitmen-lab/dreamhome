@@ -16,6 +16,22 @@ export interface City {
   housingNote: string;
   /** Well-known landmarks (not neighborhoods) used to ground "areas we serve" copy — optional, only add real ones */
   landmarks?: string[];
+  /** Real permit-issuing office name for this city (city hall dept, or the county for unincorporated work) — only set when verified. */
+  permitOffice?: string;
+  /** Real, working URL to that office's permit/inspection page, if any. */
+  permitUrl?: string;
+  /** Real, city-specific permitting process notes (turnaround time, inspection scheduling quirks) — not generic "we pull permits" boilerplate. */
+  permitProcessNote?: string;
+  /**
+   * Structured build-era range distinct from the prose `housingNote` above,
+   * e.g. "1990s–2000s" — only set when explicitly stated/known, never
+   * inferred or guessed.
+   */
+  buildEra?: string;
+  /** Typical HOA/deed-restriction constraints affecting remodeling in this city's neighborhoods (exterior color approval, material limits, etc.) — only set when real and verified. */
+  hoaNote?: string;
+  /** Verified local climate/soil factor relevant to remodeling work here (soil movement, hail frequency, drainage, flood zone) — must be a sourced fact, not generic North Texas boilerplate. */
+  climateSoilNote?: string;
 }
 
 export const cities: City[] = [
@@ -39,6 +55,10 @@ export const cities: City[] = [
     ],
     housingNote:
       "a mix of historic homes near downtown that often need careful updates and newer builds south of Loop 288",
+    // TODO(yojainier): Permits in Denton — which office issues remodeling/plumbing/electrical permits (city hall, or Denton County for unincorporated work)? Portal URL + typical turnaround or inspection-scheduling notes?
+    // TODO(yojainier): Build era for Denton — what decade(s) are most Denton homes we work on from? Only give a range you're confident is accurate.
+    // TODO(yojainier): HOA in Denton — do the Denton neighborhoods we work in most often have HOA rules affecting remodels (exterior color approval, roofing/siding material limits, etc.)? If so, what's the typical constraint?
+    // TODO(yojainier): Climate/soil in Denton — any verified local factor (soil movement, hail frequency, drainage, flood zone) specific to Denton/Denton County that affects remodeling work?
   },
   {
     slug: "haslet-tx",
@@ -60,6 +80,10 @@ export const cities: City[] = [
     ],
     housingNote:
       "newer construction on generous lots, where owners often upgrade builder-grade finishes",
+    // TODO(yojainier): Permits in Haslet — which office issues remodeling/plumbing/electrical permits (city hall, or Tarrant County for unincorporated work)? Portal URL + typical turnaround or inspection-scheduling notes?
+    // TODO(yojainier): Build era for Haslet — what decade(s) are most Haslet homes we work on from? Only give a range you're confident is accurate.
+    // TODO(yojainier): HOA in Haslet — do the Haslet neighborhoods we work in most often have HOA rules affecting remodels (exterior color approval, roofing/siding material limits, etc.)? If so, what's the typical constraint?
+    // TODO(yojainier): Climate/soil in Haslet — any verified local factor (soil movement, hail frequency, drainage, flood zone) specific to Haslet/Tarrant County that affects remodeling work?
   },
   {
     slug: "keller-tx",
@@ -86,6 +110,10 @@ export const cities: City[] = [
     ],
     housingNote:
       "established 1990s–2000s homes where kitchens and primary baths are prime candidates for modernization",
+    // TODO(yojainier): Permits in Keller — which office issues remodeling/plumbing/electrical permits (city hall, or Tarrant County for unincorporated work)? Portal URL + typical turnaround or inspection-scheduling notes?
+    buildEra: "1990s–2000s",
+    // TODO(yojainier): HOA in Keller — do the Keller neighborhoods we work in most often have HOA rules affecting remodels (exterior color approval, roofing/siding material limits, etc.)? If so, what's the typical constraint?
+    // TODO(yojainier): Climate/soil in Keller — any verified local factor (soil movement, hail frequency, drainage, flood zone) specific to Keller/Tarrant County that affects remodeling work?
   },
   {
     slug: "roanoke-tx",
@@ -107,6 +135,11 @@ export const cities: City[] = [
     ],
     housingNote:
       "newer family homes where owners personalize open-concept spaces and outdoor living areas",
+    // TODO(yojainier): Permits in Roanoke — which office issues remodeling/plumbing/electrical permits (city hall, or Denton County for unincorporated work)? Portal URL + typical turnaround or inspection-scheduling notes?
+    // TODO(yojainier): Build era for Roanoke — what decade(s) are most Roanoke homes we work on from? Only give a range you're confident is accurate.
+    // TODO(yojainier): HOA in Roanoke — do the Roanoke neighborhoods we work in most often have HOA rules affecting remodels (exterior color approval, roofing/siding material limits, etc.)? If so, what's the typical constraint?
+    // TODO(yojainier): Climate/soil in Roanoke — any verified local factor (soil movement, hail frequency, drainage, flood zone) specific to Roanoke/Denton County that affects remodeling work?
+    // TODO(yojainier): Featured project for Roanoke — got one real completed project in Roanoke (any service) we can reference by project type, even without a client quote? Add it to data/testimonials.ts so this city gets a featured local project.
   },
   {
     slug: "watauga-tx",
@@ -133,6 +166,10 @@ export const cities: City[] = [
     ],
     housingNote:
       "well-built 1970s–90s ranch homes where updated kitchens, baths, and flooring dramatically boost value",
+    // TODO(yojainier): Permits in Watauga — which office issues remodeling/plumbing/electrical permits (city hall, or Tarrant County for unincorporated work)? Portal URL + typical turnaround or inspection-scheduling notes?
+    buildEra: "1970s–90s",
+    // TODO(yojainier): HOA in Watauga — do the Watauga neighborhoods we work in most often have HOA rules affecting remodels (exterior color approval, roofing/siding material limits, etc.)? If so, what's the typical constraint?
+    // TODO(yojainier): Climate/soil in Watauga — any verified local factor (soil movement, hail frequency, drainage, flood zone) specific to Watauga/Tarrant County that affects remodeling work?
   },
   {
     slug: "mesquite-tx",
@@ -154,6 +191,10 @@ export const cities: City[] = [
     ],
     housingNote:
       "established brick homes from the 1970s–2000s, ideal candidates for kitchen, bath, and flooring updates",
+    // TODO(yojainier): Permits in Mesquite — which office issues remodeling/plumbing/electrical permits (city hall, or Dallas County for unincorporated work)? Portal URL + typical turnaround or inspection-scheduling notes?
+    buildEra: "1970s–2000s",
+    // TODO(yojainier): HOA in Mesquite — do the Mesquite neighborhoods we work in most often have HOA rules affecting remodels (exterior color approval, roofing/siding material limits, etc.)? If so, what's the typical constraint?
+    // TODO(yojainier): Climate/soil in Mesquite — any verified local factor (soil movement, hail frequency, drainage, flood zone) specific to Mesquite/Dallas County that affects remodeling work?
   },
   {
     slug: "arlington-tx",
@@ -175,6 +216,10 @@ export const cities: City[] = [
     ],
     housingNote:
       "an enormous range, from 1950s cottages to 2010s builds — each needing a different remodeling approach",
+    // TODO(yojainier): Permits in Arlington — which office issues remodeling/plumbing/electrical permits (city hall, or Tarrant County for unincorporated work)? Portal URL + typical turnaround or inspection-scheduling notes?
+    // TODO(yojainier): Build era for Arlington — what decade(s) are most Arlington homes we work on from? Only give a range you're confident is accurate.
+    // TODO(yojainier): HOA in Arlington — do the Arlington neighborhoods we work in most often have HOA rules affecting remodels (exterior color approval, roofing/siding material limits, etc.)? If so, what's the typical constraint?
+    // TODO(yojainier): Climate/soil in Arlington — any verified local factor (soil movement, hail frequency, drainage, flood zone) specific to Arlington/Tarrant County that affects remodeling work?
   },
   {
     slug: "grapevine-tx",
@@ -196,6 +241,10 @@ export const cities: City[] = [
     ],
     housingNote:
       "character-rich older homes near Main Street and lakeside properties where quality finishes matter",
+    // TODO(yojainier): Permits in Grapevine — which office issues remodeling/plumbing/electrical permits (city hall, or Tarrant County for unincorporated work)? Portal URL + typical turnaround or inspection-scheduling notes?
+    // TODO(yojainier): Build era for Grapevine — what decade(s) are most Grapevine homes we work on from? Only give a range you're confident is accurate.
+    // TODO(yojainier): HOA in Grapevine — do the Grapevine neighborhoods we work in most often have HOA rules affecting remodels (exterior color approval, roofing/siding material limits, etc.)? If so, what's the typical constraint?
+    // TODO(yojainier): Climate/soil in Grapevine — any verified local factor (soil movement, hail frequency, drainage, flood zone) specific to Grapevine/Tarrant County that affects remodeling work?
   },
   {
     slug: "fort-worth-tx",
@@ -244,6 +293,10 @@ export const cities: City[] = [
       "the Fort Worth Stockyards",
       "the Trinity Trails",
     ],
+    // TODO(yojainier): Permits in Fort Worth — which office issues remodeling/plumbing/electrical permits (city hall, or Tarrant County for unincorporated work)? Portal URL + typical turnaround or inspection-scheduling notes?
+    // TODO(yojainier): Build era for Fort Worth — what decade(s) are most Fort Worth homes we work on from? Only give a range you're confident is accurate.
+    // TODO(yojainier): HOA in Fort Worth — do the Fort Worth neighborhoods we work in most often have HOA rules affecting remodels (exterior color approval, roofing/siding material limits, etc.)? If so, what's the typical constraint?
+    // TODO(yojainier): Climate/soil in Fort Worth — any verified local factor (soil movement, hail frequency, drainage, flood zone) specific to Fort Worth/Tarrant County that affects remodeling work?
   },
   {
     slug: "lake-worth-tx",
@@ -265,6 +318,11 @@ export const cities: City[] = [
     ],
     housingNote:
       "lakeside properties and established homes where smart updates deliver strong returns",
+    // TODO(yojainier): Permits in Lake Worth — which office issues remodeling/plumbing/electrical permits (city hall, or Tarrant County for unincorporated work)? Portal URL + typical turnaround or inspection-scheduling notes?
+    // TODO(yojainier): Build era for Lake Worth — what decade(s) are most Lake Worth homes we work on from? Only give a range you're confident is accurate.
+    // TODO(yojainier): HOA in Lake Worth — do the Lake Worth neighborhoods we work in most often have HOA rules affecting remodels (exterior color approval, roofing/siding material limits, etc.)? If so, what's the typical constraint?
+    // TODO(yojainier): Climate/soil in Lake Worth — any verified local factor (soil movement, hail frequency, drainage, flood zone) specific to Lake Worth/Tarrant County that affects remodeling work?
+    // TODO(yojainier): Featured project for Lake Worth — got one real completed project in Lake Worth (any service) we can reference by project type, even without a client quote? Add it to data/testimonials.ts so this city gets a featured local project.
   },
   {
     slug: "haltom-city-tx",
@@ -290,6 +348,11 @@ export const cities: City[] = [
     ],
     housingNote:
       "solid mid-century homes with great bones, perfect for kitchen, bath, and flooring transformations",
+    // TODO(yojainier): Permits in Haltom City — which office issues remodeling/plumbing/electrical permits (city hall, or Tarrant County for unincorporated work)? Portal URL + typical turnaround or inspection-scheduling notes?
+    // TODO(yojainier): Build era for Haltom City — what decade(s) are most Haltom City homes we work on from? Only give a range you're confident is accurate.
+    // TODO(yojainier): HOA in Haltom City — do the Haltom City neighborhoods we work in most often have HOA rules affecting remodels (exterior color approval, roofing/siding material limits, etc.)? If so, what's the typical constraint?
+    // TODO(yojainier): Climate/soil in Haltom City — any verified local factor (soil movement, hail frequency, drainage, flood zone) specific to Haltom City/Tarrant County that affects remodeling work?
+    // TODO(yojainier): Featured project for Haltom City — got one real completed project in Haltom City (any service) we can reference by project type, even without a client quote? Add it to data/testimonials.ts so this city gets a featured local project.
   },
   {
     slug: "argyle-tx",
@@ -311,6 +374,11 @@ export const cities: City[] = [
     ],
     housingNote:
       "custom and semi-custom homes on large lots where premium finishes and quality work are the standard",
+    // TODO(yojainier): Permits in Argyle — which office issues remodeling/plumbing/electrical permits (city hall, or Denton County for unincorporated work)? Portal URL + typical turnaround or inspection-scheduling notes?
+    // TODO(yojainier): Build era for Argyle — what decade(s) are most Argyle homes we work on from? Only give a range you're confident is accurate.
+    // TODO(yojainier): HOA in Argyle — do the Argyle neighborhoods we work in most often have HOA rules affecting remodels (exterior color approval, roofing/siding material limits, etc.)? If so, what's the typical constraint?
+    // TODO(yojainier): Climate/soil in Argyle — any verified local factor (soil movement, hail frequency, drainage, flood zone) specific to Argyle/Denton County that affects remodeling work?
+    // TODO(yojainier): Featured project for Argyle — got one real completed project in Argyle (any service) we can reference by project type, even without a client quote? Add it to data/testimonials.ts so this city gets a featured local project.
   },
   {
     slug: "flower-mound-tx",
@@ -332,6 +400,10 @@ export const cities: City[] = [
     ],
     housingNote:
       "well-maintained 1990s–2000s homes where kitchens and primary suites are ready for modern refreshes",
+    // TODO(yojainier): Permits in Flower Mound — which office issues remodeling/plumbing/electrical permits (city hall, or Denton County for unincorporated work)? Portal URL + typical turnaround or inspection-scheduling notes?
+    buildEra: "1990s–2000s",
+    // TODO(yojainier): HOA in Flower Mound — do the Flower Mound neighborhoods we work in most often have HOA rules affecting remodels (exterior color approval, roofing/siding material limits, etc.)? If so, what's the typical constraint?
+    // TODO(yojainier): Climate/soil in Flower Mound — any verified local factor (soil movement, hail frequency, drainage, flood zone) specific to Flower Mound/Denton County that affects remodeling work?
   },
   {
     slug: "justin-tx",
@@ -353,6 +425,11 @@ export const cities: City[] = [
     ],
     housingNote:
       "a blend of older farmhouse-style properties and brand-new subdivisions, each with distinct remodeling needs",
+    // TODO(yojainier): Permits in Justin — which office issues remodeling/plumbing/electrical permits (city hall, or Denton County for unincorporated work)? Portal URL + typical turnaround or inspection-scheduling notes?
+    // TODO(yojainier): Build era for Justin — what decade(s) are most Justin homes we work on from? Only give a range you're confident is accurate.
+    // TODO(yojainier): HOA in Justin — do the Justin neighborhoods we work in most often have HOA rules affecting remodels (exterior color approval, roofing/siding material limits, etc.)? If so, what's the typical constraint?
+    // TODO(yojainier): Climate/soil in Justin — any verified local factor (soil movement, hail frequency, drainage, flood zone) specific to Justin/Denton County that affects remodeling work?
+    // TODO(yojainier): Featured project for Justin — got one real completed project in Justin (any service) we can reference by project type, even without a client quote? Add it to data/testimonials.ts so this city gets a featured local project.
   },
   {
     slug: "decatur-tx",
@@ -374,6 +451,11 @@ export const cities: City[] = [
     ],
     housingNote:
       "historic homes near the square and ranch properties that call for versatile, experienced crews",
+    // TODO(yojainier): Permits in Decatur — which office issues remodeling/plumbing/electrical permits (city hall, or Wise County for unincorporated work)? Portal URL + typical turnaround or inspection-scheduling notes?
+    // TODO(yojainier): Build era for Decatur — what decade(s) are most Decatur homes we work on from? Only give a range you're confident is accurate.
+    // TODO(yojainier): HOA in Decatur — do the Decatur neighborhoods we work in most often have HOA rules affecting remodels (exterior color approval, roofing/siding material limits, etc.)? If so, what's the typical constraint?
+    // TODO(yojainier): Climate/soil in Decatur — any verified local factor (soil movement, hail frequency, drainage, flood zone) specific to Decatur/Wise County that affects remodeling work?
+    // TODO(yojainier): Featured project for Decatur — got one real completed project in Decatur (any service) we can reference by project type, even without a client quote? Add it to data/testimonials.ts so this city gets a featured local project.
   },
   {
     slug: "grand-prairie-tx",
@@ -395,6 +477,11 @@ export const cities: City[] = [
     ],
     housingNote:
       "everything from 1960s mid-city homes to newer lakeside builds near Joe Pool Lake",
+    // TODO(yojainier): Permits in Grand Prairie — which office issues remodeling/plumbing/electrical permits (city hall, or Dallas County for unincorporated work)? Portal URL + typical turnaround or inspection-scheduling notes?
+    // TODO(yojainier): Build era for Grand Prairie — what decade(s) are most Grand Prairie homes we work on from? Only give a range you're confident is accurate.
+    // TODO(yojainier): HOA in Grand Prairie — do the Grand Prairie neighborhoods we work in most often have HOA rules affecting remodels (exterior color approval, roofing/siding material limits, etc.)? If so, what's the typical constraint?
+    // TODO(yojainier): Climate/soil in Grand Prairie — any verified local factor (soil movement, hail frequency, drainage, flood zone) specific to Grand Prairie/Dallas County that affects remodeling work?
+    // TODO(yojainier): Featured project for Grand Prairie — got one real completed project in Grand Prairie (any service) we can reference by project type, even without a client quote? Add it to data/testimonials.ts so this city gets a featured local project.
   },
   {
     slug: "southlake-tx",
@@ -416,6 +503,10 @@ export const cities: City[] = [
     ],
     housingNote:
       "luxury custom homes where premium materials, precise craftsmanship, and discretion are non-negotiable",
+    // TODO(yojainier): Permits in Southlake — which office issues remodeling/plumbing/electrical permits (city hall, or Tarrant County for unincorporated work)? Portal URL + typical turnaround or inspection-scheduling notes?
+    // TODO(yojainier): Build era for Southlake — what decade(s) are most Southlake homes we work on from? Only give a range you're confident is accurate.
+    // TODO(yojainier): HOA in Southlake — do the Southlake neighborhoods we work in most often have HOA rules affecting remodels (exterior color approval, roofing/siding material limits, etc.)? If so, what's the typical constraint?
+    // TODO(yojainier): Climate/soil in Southlake — any verified local factor (soil movement, hail frequency, drainage, flood zone) specific to Southlake/Tarrant County that affects remodeling work?
   },
   {
     slug: "springtown-tx",
@@ -437,6 +528,11 @@ export const cities: City[] = [
     ],
     housingNote:
       "farmhouses, manufactured homes, and in-town properties — we bring the same quality to all of them",
+    // TODO(yojainier): Permits in Springtown — which office issues remodeling/plumbing/electrical permits (city hall, or Parker County for unincorporated work)? Portal URL + typical turnaround or inspection-scheduling notes?
+    // TODO(yojainier): Build era for Springtown — what decade(s) are most Springtown homes we work on from? Only give a range you're confident is accurate.
+    // TODO(yojainier): HOA in Springtown — do the Springtown neighborhoods we work in most often have HOA rules affecting remodels (exterior color approval, roofing/siding material limits, etc.)? If so, what's the typical constraint?
+    // TODO(yojainier): Climate/soil in Springtown — any verified local factor (soil movement, hail frequency, drainage, flood zone) specific to Springtown/Parker County that affects remodeling work?
+    // TODO(yojainier): Featured project for Springtown — got one real completed project in Springtown (any service) we can reference by project type, even without a client quote? Add it to data/testimonials.ts so this city gets a featured local project.
   },
   {
     slug: "colleyville-tx",
@@ -463,6 +559,10 @@ export const cities: City[] = [
     ],
     housingNote:
       "executive and estate homes from the 1980s–2000s entering their prime renovation window",
+    // TODO(yojainier): Permits in Colleyville — which office issues remodeling/plumbing/electrical permits (city hall, or Tarrant County for unincorporated work)? Portal URL + typical turnaround or inspection-scheduling notes?
+    buildEra: "1980s–2000s",
+    // TODO(yojainier): HOA in Colleyville — do the Colleyville neighborhoods we work in most often have HOA rules affecting remodels (exterior color approval, roofing/siding material limits, etc.)? If so, what's the typical constraint?
+    // TODO(yojainier): Climate/soil in Colleyville — any verified local factor (soil movement, hail frequency, drainage, flood zone) specific to Colleyville/Tarrant County that affects remodeling work?
   },
   {
     slug: "north-richland-hills-tx",
@@ -489,6 +589,10 @@ export const cities: City[] = [
     ],
     housingNote:
       "established 1980s–2000s neighborhoods where kitchens, baths, and floors are top remodeling priorities",
+    // TODO(yojainier): Permits in North Richland Hills — which office issues remodeling/plumbing/electrical permits (city hall, or Tarrant County for unincorporated work)? Portal URL + typical turnaround or inspection-scheduling notes?
+    buildEra: "1980s–2000s",
+    // TODO(yojainier): HOA in North Richland Hills — do the North Richland Hills neighborhoods we work in most often have HOA rules affecting remodels (exterior color approval, roofing/siding material limits, etc.)? If so, what's the typical constraint?
+    // TODO(yojainier): Climate/soil in North Richland Hills — any verified local factor (soil movement, hail frequency, drainage, flood zone) specific to North Richland Hills/Tarrant County that affects remodeling work?
   },
 ];
 
