@@ -2,14 +2,15 @@ import type { MetadataRoute } from "next";
 import { services } from "@/data/services";
 import { cities } from "@/data/cities";
 import { blogPosts } from "@/data/blogPosts";
-import { blogPostSlugsEsMx } from "@/data/blogPosts.es-mx";
+import { blogPostsEsMx, blogPostSlugsEsMx } from "@/data/blogPosts.es-mx";
 import { SITE_URL, SERVICE_CITY_ES_MX } from "@/lib/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  // No lastModified: every page here is generated from the same source data
-  // at build time, so a single build-time timestamp applied to all 158 URLs
-  // would tell Google nothing about which pages actually changed. Add real
-  // per-entry timestamps if/when content is tracked with real update dates.
+  // No lastModified on these: they're generated from the same source data at
+  // build time, so a single build-time timestamp would tell Google nothing
+  // about which pages actually changed. Blog posts are the exception --
+  // see blogPages/blogPagesEsMx below -- since those carry real tracked
+  // publishedDate/updatedDate fields.
   const staticPages: MetadataRoute.Sitemap = [
     { url: `${SITE_URL}/`, changeFrequency: "weekly", priority: 1 },
     { url: `${SITE_URL}/services`, changeFrequency: "weekly", priority: 0.9 },
@@ -60,8 +61,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
+  // Unlike the generated pages above, blog posts carry real tracked
+  // publishedDate/updatedDate fields, so a real lastModified is meaningful here.
   const blogPages: MetadataRoute.Sitemap = blogPosts.map((post) => ({
     url: `${SITE_URL}/blog/${post.slug}`,
+    lastModified: post.updatedDate ?? post.publishedDate,
     changeFrequency: "monthly",
     priority: 0.6,
     ...(blogPostSlugsEsMx.includes(post.slug) && {
@@ -69,11 +73,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }),
   }));
 
-  const blogPagesEsMx: MetadataRoute.Sitemap = blogPostSlugsEsMx.map((slug) => ({
-    url: `${SITE_URL}/es-mx/blog/${slug}`,
+  const blogPagesEsMx: MetadataRoute.Sitemap = blogPostsEsMx.map((post) => ({
+    url: `${SITE_URL}/es-mx/blog/${post.slug}`,
+    lastModified: post.updatedDate ?? post.publishedDate,
     changeFrequency: "monthly",
     priority: 0.55,
-    alternates: { languages: { "en-US": `${SITE_URL}/blog/${slug}` } },
+    alternates: { languages: { "en-US": `${SITE_URL}/blog/${post.slug}` } },
   }));
 
   const servicePages: MetadataRoute.Sitemap = services.map((service) => ({
