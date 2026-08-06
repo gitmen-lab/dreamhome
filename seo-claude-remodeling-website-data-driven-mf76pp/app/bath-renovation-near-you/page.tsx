@@ -188,7 +188,7 @@ export default function BathRenovationNearYouPage() {
             <p className="mt-1 mb-6 text-sm text-muted-foreground">
               We respond to every request within one business day.
             </p>
-            <ContactForm defaultService="bathroom-remodeling" />
+            <ContactForm />
           </div>
         </div>
       </section>

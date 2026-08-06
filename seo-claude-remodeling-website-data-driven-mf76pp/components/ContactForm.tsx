@@ -6,14 +6,8 @@ import { CheckCircle2, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { services } from "@/data/services";
-import { servicesEsMx } from "@/data/services.es-mx";
-import { cities } from "@/data/cities";
-import { cityLabel } from "@/lib/helpers";
 
 interface ContactFormProps {
-  defaultService?: string;
-  defaultCity?: string;
   /** Defaults to "en". Swaps every visible label/placeholder/message. */
   locale?: "en" | "es";
 }
@@ -25,12 +19,6 @@ const STRINGS = {
     namePlaceholder: "Jane Smith",
     phone: "Phone",
     email: "Email",
-    serviceNeeded: "Service Needed",
-    selectService: "Select a service…",
-    somethingElse: "Something else",
-    yourCity: "Your City",
-    selectCity: "Select your city…",
-    otherNearby: "Other / nearby",
     projectLabel: "Tell Us About Your Project",
     projectPlaceholder: "e.g., We'd like to convert our tub to a walk-in shower…",
     sending: "Sending…",
@@ -48,12 +36,6 @@ const STRINGS = {
     namePlaceholder: "Juana Pérez",
     phone: "Teléfono",
     email: "Correo Electrónico",
-    serviceNeeded: "Servicio Necesitado",
-    selectService: "Seleccione un servicio…",
-    somethingElse: "Otro",
-    yourCity: "Su Ciudad",
-    selectCity: "Seleccione su ciudad…",
-    otherNearby: "Otra / cercana",
     projectLabel: "Cuéntenos Sobre su Proyecto",
     projectPlaceholder: "por ejemplo: Nos gustaría convertir nuestra tina en una regadera de entrada…",
     sending: "Enviando…",
@@ -67,12 +49,11 @@ const STRINGS = {
   },
 };
 
-export function ContactForm({ defaultService, defaultCity, locale = "en" }: ContactFormProps) {
+export function ContactForm({ locale = "en" }: ContactFormProps) {
   const router = useRouter();
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [error, setError] = useState<string | null>(null);
   const t = STRINGS[locale];
-  const serviceList = locale === "es" ? servicesEsMx : services;
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -150,49 +131,6 @@ export function ContactForm({ defaultService, defaultCity, locale = "en" }: Cont
           autoComplete="email"
           placeholder="jane@example.com"
         />
-      </div>
-      <div className="grid gap-4 sm:grid-cols-2">
-        <div>
-          <label
-            htmlFor="service"
-            className="mb-1.5 block text-sm font-medium text-charcoal"
-          >
-            {t.serviceNeeded}
-          </label>
-          <select
-            id="service"
-            name="service"
-            defaultValue={defaultService ?? ""}
-            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-          >
-            <option value="">{t.selectService}</option>
-            {serviceList.map((s) => (
-              <option key={s.slug} value={s.slug}>
-                {s.name}
-              </option>
-            ))}
-            <option value="other">{t.somethingElse}</option>
-          </select>
-        </div>
-        <div>
-          <label htmlFor="city" className="mb-1.5 block text-sm font-medium text-charcoal">
-            {t.yourCity}
-          </label>
-          <select
-            id="city"
-            name="city"
-            defaultValue={defaultCity ?? ""}
-            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-          >
-            <option value="">{t.selectCity}</option>
-            {cities.map((c) => (
-              <option key={c.slug} value={c.slug}>
-                {cityLabel(c)}
-              </option>
-            ))}
-            <option value="other">{t.otherNearby}</option>
-          </select>
-        </div>
       </div>
       <div>
         <label htmlFor="message" className="mb-1.5 block text-sm font-medium text-charcoal">
