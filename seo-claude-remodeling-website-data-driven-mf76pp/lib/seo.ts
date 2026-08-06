@@ -42,19 +42,34 @@ export function buildMetadata({
 }: PageMeta): Metadata {
   const url = `${SITE_URL}${path}`;
   const ogImage = image ?? "/images/og-default.jpg";
+
+  // When a real translated counterpart exists, emit a full, self-referencing
+  // hreflang set on BOTH language versions: this page's own language, the
+  // alternate(s), and x-default pointing at the English URL (the site's
+  // primary/default language) -- never just the one-way cross-link.
+  let languages: Record<string, string> | undefined;
+  if (alternateLanguages) {
+    const selfHreflang = locale === "es_MX" ? "es-MX" : "en-US";
+    const otherUrls = Object.fromEntries(
+      Object.entries(alternateLanguages).map(([lang, altPath]) => [
+        lang,
+        `${SITE_URL}${altPath}`,
+      ])
+    );
+    const englishUrl = locale === "en_US" ? url : otherUrls["en-US"];
+    languages = {
+      [selfHreflang]: url,
+      ...otherUrls,
+      ...(englishUrl && { "x-default": englishUrl }),
+    };
+  }
+
   return {
     title,
     description,
     alternates: {
       canonical: url,
-      ...(alternateLanguages && {
-        languages: Object.fromEntries(
-          Object.entries(alternateLanguages).map(([lang, altPath]) => [
-            lang,
-            `${SITE_URL}${altPath}`,
-          ])
-        ),
-      }),
+      ...(languages && { languages }),
     },
     openGraph: {
       title,
