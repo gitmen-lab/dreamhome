@@ -3,7 +3,7 @@ import { services } from "@/data/services";
 import { cities } from "@/data/cities";
 import { blogPosts } from "@/data/blogPosts";
 import { blogPostSlugsEsMx } from "@/data/blogPosts.es-mx";
-import { SITE_URL } from "@/lib/seo";
+import { SITE_URL, SERVICE_CITY_ES_MX } from "@/lib/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // No lastModified: every page here is generated from the same source data
@@ -117,7 +117,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${SITE_URL}/services/${service.slug}/${city.slug}`,
       changeFrequency: "monthly" as const,
       priority: 0.7,
+      ...(SERVICE_CITY_ES_MX[`${service.slug}:${city.slug}`] && {
+        alternates: {
+          languages: {
+            "es-MX": `${SITE_URL}/es-mx/services/${service.slug}/${city.slug}`,
+          },
+        },
+      }),
     }))
+  );
+
+  const serviceCityPagesEsMx: MetadataRoute.Sitemap = Object.keys(SERVICE_CITY_ES_MX).map(
+    (combo) => {
+      const [serviceSlug, citySlug] = combo.split(":");
+      return {
+        url: `${SITE_URL}/es-mx/services/${serviceSlug}/${citySlug}`,
+        changeFrequency: "monthly" as const,
+        priority: 0.65,
+        alternates: {
+          languages: { "en-US": `${SITE_URL}/services/${serviceSlug}/${citySlug}` },
+        },
+      };
+    }
   );
 
   return [
@@ -127,6 +148,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...cityPages,
     ...cityPagesEsMx,
     ...serviceCityPages,
+    ...serviceCityPagesEsMx,
     ...blogPages,
     ...blogPagesEsMx,
   ];

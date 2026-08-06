@@ -19,6 +19,8 @@ export const enToEs: Record<string, string> = {
   ...Object.fromEntries(
     cities.map((c) => [`/service-areas/${c.slug}`, `/es-mx/service-areas/${c.slug}`])
   ),
+  // One-off combo exception -- see SERVICE_CITY_ES_MX in lib/seo.ts.
+  "/services/bathroom-remodeling/keller-tx": "/es-mx/services/bathroom-remodeling/keller-tx",
   "/blog": "/es-mx/blog",
   ...Object.fromEntries(
     blogPostSlugs

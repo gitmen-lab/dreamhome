@@ -119,13 +119,27 @@ const SERVICE_CITY_METADATA_OVERRIDES: Record<
   },
 };
 
+/**
+ * Combos that have a real, hand-translated Spanish counterpart (one-off
+ * exception pages under app/es-mx/services/<service>/<city>/, not the
+ * general [service]/[city] dynamic route). Add an entry here whenever
+ * another combo gets a Spanish version.
+ */
+export const SERVICE_CITY_ES_MX: Record<string, true> = {
+  "bathroom-remodeling:keller-tx": true,
+};
+
 export function serviceCityMetadata(service: Service, city: City): Metadata {
   const override = SERVICE_CITY_METADATA_OVERRIDES[`${service.slug}:${city.slug}`];
+  const hasEsMx = SERVICE_CITY_ES_MX[`${service.slug}:${city.slug}`];
   return buildMetadata({
     title: override?.title ?? `${service.name} ${cityLabel(city)} - ${company.shortName}`,
     description: override?.description ?? generateSEODescription(service, city),
     path: `/services/${service.slug}/${city.slug}`,
     image: service.image,
+    ...(hasEsMx && {
+      alternateLanguages: { "es-MX": `/es-mx/services/${service.slug}/${city.slug}` },
+    }),
   });
 }
 
