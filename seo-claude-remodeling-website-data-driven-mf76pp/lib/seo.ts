@@ -30,6 +30,9 @@ interface PageMeta {
    * see lib/es-mx/pageMap.ts.
    */
   alternateLanguages?: Record<string, string>;
+  /** Set true for utility pages (e.g. a post-submit thank-you page) that
+   * should never appear in search results. Defaults to indexable. */
+  noindex?: boolean;
 }
 
 export function buildMetadata({
@@ -39,6 +42,7 @@ export function buildMetadata({
   image,
   locale = "en_US",
   alternateLanguages,
+  noindex,
 }: PageMeta): Metadata {
   const url = `${SITE_URL}${path}`;
   const ogImage = image ?? "/images/og-default.jpg";
@@ -67,6 +71,7 @@ export function buildMetadata({
   return {
     title,
     description,
+    ...(noindex && { robots: { index: false, follow: true } }),
     alternates: {
       canonical: url,
       ...(languages && { languages }),

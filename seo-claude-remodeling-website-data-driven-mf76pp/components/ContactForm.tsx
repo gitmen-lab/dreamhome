@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { useRouter } from "next/navigation";
 import { CheckCircle2, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -67,6 +68,7 @@ const STRINGS = {
 };
 
 export function ContactForm({ defaultService, defaultCity, locale = "en" }: ContactFormProps) {
+  const router = useRouter();
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [error, setError] = useState<string | null>(null);
   const t = STRINGS[locale];
@@ -93,6 +95,7 @@ export function ContactForm({ defaultService, defaultCity, locale = "en" }: Cont
       }
 
       setStatus("success");
+      router.push(locale === "es" ? "/es-mx/gracias" : "/thank-you");
     } catch (err) {
       setStatus("error");
       setError(err instanceof Error ? err.message : t.genericError);
