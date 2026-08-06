@@ -40,7 +40,8 @@ export async function POST(request: Request) {
         city,
         message,
       });
-      return NextResponse.json({ success: true });
+      // TEMP DEBUG — remove after diagnosing the Hostinger env var issue.
+      return NextResponse.json({ success: true, _debug: { hasApiKey: false, toEmail } });
     }
 
     const resend = new Resend(apiKey);
@@ -66,13 +67,15 @@ export async function POST(request: Request) {
 
     if (error) {
       console.error("[contact] Resend send failed:", error);
+      // TEMP DEBUG — remove after diagnosing the Hostinger env var issue.
       return NextResponse.json(
-        { error: "Unable to submit the form. Please try again." },
+        { error: "Unable to submit the form. Please try again.", _debug: { hasApiKey: true, toEmail, resendError: error } },
         { status: 500 }
       );
     }
 
-    return NextResponse.json({ success: true });
+    // TEMP DEBUG — remove after diagnosing the Hostinger env var issue.
+    return NextResponse.json({ success: true, _debug: { hasApiKey: true, toEmail } });
   } catch (error) {
     console.error("[contact] Unexpected error:", error);
     return NextResponse.json(
