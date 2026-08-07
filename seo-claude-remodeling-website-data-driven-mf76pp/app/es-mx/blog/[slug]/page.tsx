@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ChevronLeft } from "lucide-react";
 import { getBlogPostEsMx, blogPostSlugsEsMx } from "@/data/blogPosts.es-mx";
+import { blogPostSlugs } from "@/data/blogPosts";
 import { blogBodiesEsMx } from "@/content/blog/es-mx";
 import {
   buildMetadata,
@@ -39,7 +40,11 @@ export async function generateMetadata({
     path: `/es-mx/blog/${post.slug}`,
     image: post.heroImage.src,
     locale: "es_MX",
-    alternateLanguages: { "en-US": `/blog/${post.slug}` },
+    // Only claim an English alternate when a real English post with this
+    // exact slug exists -- otherwise this would hreflang straight into a 404.
+    ...(blogPostSlugs.includes(post.slug) && {
+      alternateLanguages: { "en-US": `/blog/${post.slug}` },
+    }),
   });
 }
 

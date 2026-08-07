@@ -64,6 +64,59 @@ export const blogPostsEsMx: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "remodelacion-cocina-fort-worth-espanol",
+    title: "Remodelación de Cocina en Fort Worth con un Contratista que Habla Español",
+    metaDescription:
+      "Contratista de remodelación de cocina en Fort Worth que habla español. Cotización gratis por escrito, contrato en español, con licencia y seguro. Llame al (817) 374-0962.",
+    keyword: "remodelación de cocina fort worth español",
+    excerpt:
+      "Cómo funciona una remodelación de cocina en Fort Worth con un contratista que habla español: tiempos reales, qué debe incluir la cotización, cómo verificar que el contratista es legítimo en Texas, y permisos.",
+    publishedDate: "2026-08-07",
+    heroImage: {
+      src: "/images/services/kitchen.jpg",
+      alt: "Cocina remodelada y luminosa con gabinetes blancos, herrajes dorados y piso de madera",
+    },
+    relatedServiceSlug: "kitchen-remodeling",
+    relatedCitySlugs: ["fort-worth-tx"],
+    faqs: [
+      {
+        question: "¿El equipo de trabajo también habla español o solo el vendedor?",
+        answer:
+          "Es la pregunta más importante que puede hacer. Muchas empresas anuncian que hablan español, pero solo la persona que contesta el teléfono lo habla. Pregunte específicamente si el gerente de proyecto, quien le da actualizaciones diarias, habla español, y si el contrato y la cotización se le entregan por escrito en español.",
+      },
+      {
+        question: "¿Cuánto tiempo toma una remodelación de cocina completa?",
+        answer:
+          "De 4 a 8 semanas de construcción una vez que los materiales llegan, más 1 o 2 semanas antes para el diseño y la selección de materiales. Los gabinetes son casi siempre lo que determina la fecha de inicio, porque tienen tiempo de fabricación — pedir todo antes de la demolición mantiene el calendario firme.",
+      },
+      {
+        question: "¿Cuánto cuesta remodelar una cocina?",
+        answer:
+          "Los proyectos de reemplazo de gabinetes y cubiertas suelen costar entre $12,000 y $25,000, mientras que una renovación completa de cocina típicamente va de $30,000 a $75,000 o más, dependiendo del tamaño, cambios de distribución y materiales. Recibirá una cotización detallada línea por línea antes de comprometerse a nada.",
+      },
+      {
+        question: "¿Necesito ser ciudadano o residente para contratar a un contratista?",
+        answer:
+          "No. Para contratar trabajo de remodelación en su vivienda no se requiere ciudadanía ni estatus migratorio específico. Lo que sí necesita es ser el propietario de la casa o tener autorización del propietario, porque los permisos de construcción se emiten a nombre de la propiedad.",
+      },
+      {
+        question: "¿Se requiere permiso para remodelar una cocina en Fort Worth?",
+        answer:
+          "Generalmente sí, cuando se modifica la plomería, la electricidad, o se cambian o reparan paredes o pisos en un área de 16 pies cuadrados o más. Cambiar únicamente gabinetes y cubiertas sin tocar instalaciones suele no requerir permiso. Confirme siempre con el Departamento de Servicios de Desarrollo de la Ciudad de Fort Worth, porque los requisitos pueden cambiar.",
+      },
+      {
+        question: "¿Cómo verifico que un contratista en Texas es legítimo?",
+        answer:
+          "Texas no emite una licencia estatal para contratistas generales de remodelación. Por eso la verificación recae en usted: pida el certificado de seguro de responsabilidad civil, confirme que el electricista tenga licencia vigente del TDLR (Departamento de Licencias y Regulación de Texas) y que el plomero tenga licencia vigente del TSBPE (Junta Estatal de Examinadores de Plomería de Texas — es una agencia distinta a TDLR), y exija que el contrato esté por escrito antes de dar cualquier anticipo.",
+      },
+      {
+        question: "¿Cuánto anticipo es normal pagar?",
+        answer:
+          "Un anticipo razonable cubre materiales iniciales, no la mayor parte del trabajo. Desconfíe de quien pida la mitad o más por adelantado, de quien exija efectivo, y de quien no entregue recibo. Los pagos deben ir ligados a etapas terminadas del proyecto y quedar establecidos por escrito en el contrato.",
+      },
+    ],
+  },
 ];
 
 export const getBlogPostEsMx = (slug: string): BlogPost | undefined =>

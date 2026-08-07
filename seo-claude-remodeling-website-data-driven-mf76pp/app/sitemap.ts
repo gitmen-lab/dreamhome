@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 import { services } from "@/data/services";
 import { cities } from "@/data/cities";
-import { blogPosts } from "@/data/blogPosts";
+import { blogPosts, blogPostSlugs } from "@/data/blogPosts";
 import { blogPostsEsMx, blogPostSlugsEsMx } from "@/data/blogPosts.es-mx";
 import { SITE_URL, SERVICE_CITY_ES_MX } from "@/lib/seo";
 
@@ -83,7 +83,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: post.updatedDate ?? post.publishedDate,
     changeFrequency: "monthly",
     priority: 0.55,
-    alternates: { languages: { "en-US": `${SITE_URL}/blog/${post.slug}` } },
+    // Only claim an English alternate when a real English post with this
+    // exact slug exists -- some /es-mx posts are Spanish-only.
+    ...(blogPostSlugs.includes(post.slug) && {
+      alternates: { languages: { "en-US": `${SITE_URL}/blog/${post.slug}` } },
+    }),
   }));
 
   const servicePages: MetadataRoute.Sitemap = services.map((service) => ({
