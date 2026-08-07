@@ -8,4 +8,6 @@ export const STANDALONE_ROUTES: string[] = [
   "/bathtub-to-shower-conversion",
   "/bath-renovation-near-you",
   "/conversion-de-tina-a-regadera",
+  "/bathroom-remodel-fort-worth",
+  "/dashboard",
 ];

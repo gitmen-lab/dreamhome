@@ -1,0 +1,18 @@
+{
+  "generatedAt": "2026-08-07T15:23:07.536868+00:00",
+  "customerId": "4851879050",
+  "campaigns": [
+    {
+      "id": "24108717045",
+      "name": "Bathroom Remodel - Fort Worth - SKAG",
+      "status": "PAUSED",
+      "cost": 0.0,
+      "conversions": 0.0,
+      "conversionsValue": 0.0,
+      "impressions": 0,
+      "clicks": 0,
+      "roas": null
+    }
+  ],
+  "recommendations": []
+}
