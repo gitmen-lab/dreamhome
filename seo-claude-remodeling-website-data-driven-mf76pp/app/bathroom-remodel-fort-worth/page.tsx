@@ -18,6 +18,10 @@ export const metadata: Metadata = buildMetadata({
     "Bathroom remodel Fort Worth — 50% off installation this month. Licensed & insured, free in-home estimate, most bathrooms done in 2-3 weeks.",
   path: "/bathroom-remodel-fort-worth",
   image: "/images/gallery/bathroom-remodel-hero-fort-worth.jpg",
+  // Paid-traffic landing page -- exists to convert, not to rank. Indexing it
+  // would split ranking signal with /services/bathroom-remodeling/fort-worth-tx,
+  // the page this site actually wants to rank organically.
+  noindex: true,
 });
 
 const faqs = [

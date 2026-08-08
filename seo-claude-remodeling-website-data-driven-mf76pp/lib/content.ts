@@ -2,6 +2,9 @@ import type { Service, ServiceFAQ } from "@/data/services";
 import type { City } from "@/data/cities";
 import { company } from "@/data/company";
 import { pickVariant, cityLabel } from "@/lib/helpers";
+import { SERVICE_CITY_DEPTH_CONTENT, type DepthSection } from "@/data/serviceCityContent";
+
+export type { DepthSection };
 
 /**
  * Content generation for service+city pages.
@@ -126,6 +129,16 @@ export function getLocalFacts(city: City): LocalFact[] {
     facts.push({ label: "Climate & soil", value: city.climateSoilNote });
   }
   return facts;
+}
+
+/**
+ * Optional, hand-written depth sections for a specific (service, city) combo
+ * — see data/serviceCityContent.ts. Same contract as getLocalFacts(): an
+ * empty array when nothing's been written for this combo, never boilerplate
+ * padding. Additive only — every other combo renders exactly as before.
+ */
+export function getServiceCityDepthContent(service: Service, city: City): DepthSection[] {
+  return SERVICE_CITY_DEPTH_CONTENT[`${service.slug}:${city.slug}`] ?? [];
 }
 
 export interface CTAContent {

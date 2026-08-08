@@ -293,10 +293,24 @@ export const cities: City[] = [
       "the Fort Worth Stockyards",
       "the Trinity Trails",
     ],
-    // TODO(yojainier): Permits in Fort Worth — which office issues remodeling/plumbing/electrical permits (city hall, or Tarrant County for unincorporated work)? Portal URL + typical turnaround or inspection-scheduling notes?
+    // Verified via web search 2026-08-07 (city's own site returns 403 to
+    // automated fetchers -- likely bot-blocking, but the URL is legitimately
+    // indexed under this exact title/path by Google, from the city's own
+    // domain). Confirm it loads in a real browser before relying on it.
+    permitOffice: "City of Fort Worth Development Services Department",
+    permitUrl:
+      "https://www.fortworthtexas.gov/departments/development-services/permits/residential-information",
+    permitProcessNote:
+      "Permits and inspection scheduling go through the city's Accela Citizen Access portal. Development Services' customer service line is (817) 392-2222; the office is at 200 Texas Street, Fort Worth, TX 76102.",
     // TODO(yojainier): Build era for Fort Worth — what decade(s) are most Fort Worth homes we work on from? Only give a range you're confident is accurate.
     // TODO(yojainier): HOA in Fort Worth — do the Fort Worth neighborhoods we work in most often have HOA rules affecting remodels (exterior color approval, roofing/siding material limits, etc.)? If so, what's the typical constraint?
-    // TODO(yojainier): Climate/soil in Fort Worth — any verified local factor (soil movement, hail frequency, drainage, flood zone) specific to Fort Worth/Tarrant County that affects remodeling work?
+    // Verified via web search 2026-08-07: Tarrant County sits on the
+    // Blackland Prairie formation (expansive clay soils that shrink/swell
+    // with seasonal moisture). General phenomenon is well corroborated
+    // across independent sources; specific percentage/PI figures vary by
+    // source and are deliberately omitted here.
+    climateSoilNote:
+      "Fort Worth sits on Blackland Prairie clay soil, which expands and contracts with seasonal moisture. That's worth planning for in bathroom work specifically — it can shift slab plumbing penetrations, crack tile over time, and throw door and window openings out of square.",
   },
   {
     slug: "lake-worth-tx",

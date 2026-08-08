@@ -38,7 +38,9 @@ import {
   generateServiceIntro,
   generateFAQs,
   generateCTA,
+  generateAreasWeServe,
   getLocalFacts,
+  getServiceCityDepthContent,
   type LocalFact,
 } from "@/lib/content";
 import {
@@ -101,6 +103,7 @@ export default async function ServiceCityPage({
   const nearbyCities = getNearbyCities(city.slug);
   const localFacts = getLocalFacts(city);
   const featuredProject = getCityProjectReference(city.slug, service.slug);
+  const depthSections = getServiceCityDepthContent(service, city);
 
   // Prefer testimonials matching this city+service, then this service, then this city.
   const cityServiceTestimonials = getTestimonialsByCity(city.slug).filter(
@@ -265,7 +268,7 @@ export default async function ServiceCityPage({
         </section>
       )}
 
-      {/* Coverage details (neighborhoods, zips, landmarks) live on the city hub -- link there instead of repeating them. */}
+      {/* Real neighborhoods/zips/landmarks from the city's own data, plus a link to the full city hub. */}
       <section className="bg-muted" aria-labelledby="areas-heading">
         <div className="container section-padding">
           <h2
@@ -275,8 +278,10 @@ export default async function ServiceCityPage({
             Areas We Serve in {city.city}
           </h2>
           <p className="mt-6 text-muted-foreground leading-relaxed max-w-3xl">
-            This {service.name.toLowerCase()} team covers all of {city.city} and {city.county}.
-            For the full list of neighborhoods, zip codes, and landmarks we serve here, see our{" "}
+            {generateAreasWeServe(city)}
+          </p>
+          <p className="mt-4 text-sm text-muted-foreground max-w-3xl">
+            See every service we offer in {city.city} on our{" "}
             <Link
               href={`/service-areas/${city.slug}`}
               className="font-semibold text-primary hover:underline"
@@ -287,6 +292,30 @@ export default async function ServiceCityPage({
           </p>
         </div>
       </section>
+
+      {/* Depth content -- hand-written per (service, city) combo, see data/serviceCityContent.ts. Renders nothing for the other 119 pages. */}
+      {depthSections.length > 0 && (
+        <section className="container section-padding" aria-labelledby="depth-heading">
+          <h2
+            id="depth-heading"
+            className="text-3xl md:text-4xl font-bold tracking-tight text-charcoal"
+          >
+            {service.name} in {city.city}: The Details
+          </h2>
+          <div className="mt-8 space-y-10 max-w-3xl">
+            {depthSections.map((section) => (
+              <div key={section.heading}>
+                <h3 className="text-xl font-semibold text-charcoal">{section.heading}</h3>
+                {section.paragraphs.map((paragraph, i) => (
+                  <p key={i} className="mt-3 text-muted-foreground leading-relaxed">
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* Shared boilerplate below this point -- identical across every city for this service. */}
 
