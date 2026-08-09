@@ -24,7 +24,7 @@ import { companyStat } from "@/lib/helpers";
 import { CheckCircle2 } from "lucide-react";
 
 export const metadata: Metadata = buildMetadata({
-  title: `DFW Home Remodeling Contractor | Kitchens, Baths & More | ${company.name}`,
+  title: `Fort Worth Home Remodeling Contractor | Kitchens, Baths & More | ${company.name}`,
   description: `Kitchen & bathroom remodeling, painting, flooring, drywall repair & demolition across the DFW Metroplex. Licensed & insured, free estimates. Call ${company.phoneDisplay}.`,
   path: "/",
   alternateLanguages: { "es-MX": "/es-mx" },
@@ -62,8 +62,8 @@ export default function HomePage() {
         eyebrow={`Rated ${companyStat("Average Rating")} by DFW homeowners`}
         title={
           <>
-            Dallas–Fort Worth&apos;s{" "}
-            <span className="text-primary">Licensed Home Remodeling Contractor</span>
+            Home Remodeling&apos;s{" "}
+            <span className="text-primary">Fort Worth TX</span>
           </>
         }
         subtitle="Remodeling done right, backed by proof."
