@@ -10,4 +10,5 @@ export const STANDALONE_ROUTES: string[] = [
   "/conversion-de-tina-a-regadera",
   "/bathroom-remodel-fort-worth",
   "/dashboard",
+  "/complete-house-renovation",
 ];
