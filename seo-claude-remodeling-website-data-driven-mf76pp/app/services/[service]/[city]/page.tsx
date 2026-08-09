@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Hero } from "@/components/Hero";
+import { AnimateIn } from "@/components/AnimateIn";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ProcessSteps } from "@/components/ProcessSteps";
 import { Testimonials } from "@/components/Testimonials";
@@ -204,40 +205,42 @@ export default async function ServiceCityPage({
 
       {/* Local facts -- real, verified per-city data only; renders nothing until data/cities.ts has real values (see TODOs there). */}
       {localFacts.length > 0 && (
-        <section className="container section-padding" aria-labelledby="local-facts-heading">
-          <h2
-            id="local-facts-heading"
-            className="text-3xl md:text-4xl font-bold tracking-tight text-charcoal"
-          >
-            What to Know Before You Remodel in {city.city}
-          </h2>
-          <div className="mt-8 grid gap-6 sm:grid-cols-2">
-            {localFacts.map((fact: LocalFact) => {
-              const Icon = LOCAL_FACT_ICONS[fact.label] ?? FileText;
-              return (
-                <div key={fact.label} className="flex gap-4 rounded-lg border bg-card p-6">
-                  <Icon className="h-6 w-6 text-primary shrink-0 mt-0.5" aria-hidden="true" />
-                  <div>
-                    <h3 className="font-semibold text-charcoal">{fact.label}</h3>
-                    <p className="mt-1.5 text-sm text-muted-foreground leading-relaxed">
-                      {fact.value}
-                    </p>
-                    {fact.url && (
-                      <a
-                        href={fact.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="mt-1.5 inline-block text-sm font-semibold text-primary hover:underline"
-                      >
-                        View permit portal
-                      </a>
-                    )}
+        <AnimateIn>
+          <section className="container section-padding" aria-labelledby="local-facts-heading">
+            <h2
+              id="local-facts-heading"
+              className="text-3xl md:text-4xl font-bold tracking-tight text-charcoal"
+            >
+              What to Know Before You Remodel in {city.city}
+            </h2>
+            <div className="mt-8 grid gap-6 sm:grid-cols-2">
+              {localFacts.map((fact: LocalFact) => {
+                const Icon = LOCAL_FACT_ICONS[fact.label] ?? FileText;
+                return (
+                  <div key={fact.label} className="flex gap-4 rounded-lg border bg-card p-6">
+                    <Icon className="h-6 w-6 text-primary shrink-0 mt-0.5" aria-hidden="true" />
+                    <div>
+                      <h3 className="font-semibold text-charcoal">{fact.label}</h3>
+                      <p className="mt-1.5 text-sm text-muted-foreground leading-relaxed">
+                        {fact.value}
+                      </p>
+                      {fact.url && (
+                        <a
+                          href={fact.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="mt-1.5 inline-block text-sm font-semibold text-primary hover:underline"
+                        >
+                          View permit portal
+                        </a>
+                      )}
+                    </div>
                   </div>
-                </div>
-              );
-            })}
-          </div>
-        </section>
+                );
+              })}
+            </div>
+          </section>
+        </AnimateIn>
       )}
 
       {/* Featured local project -- a real testimonial tied to this exact city, used as proof instead of generic copy. Absent (not fabricated) for cities with no testimonial yet. */}
@@ -295,26 +298,28 @@ export default async function ServiceCityPage({
 
       {/* Depth content -- hand-written per (service, city) combo, see data/serviceCityContent.ts. Renders nothing for the other 119 pages. */}
       {depthSections.length > 0 && (
-        <section className="container section-padding" aria-labelledby="depth-heading">
-          <h2
-            id="depth-heading"
-            className="text-3xl md:text-4xl font-bold tracking-tight text-charcoal"
-          >
-            {service.name} in {city.city}: The Details
-          </h2>
-          <div className="mt-8 space-y-10 max-w-3xl">
-            {depthSections.map((section) => (
-              <div key={section.heading}>
-                <h3 className="text-xl font-semibold text-charcoal">{section.heading}</h3>
-                {section.paragraphs.map((paragraph, i) => (
-                  <p key={i} className="mt-3 text-muted-foreground leading-relaxed">
-                    {paragraph}
-                  </p>
-                ))}
-              </div>
-            ))}
-          </div>
-        </section>
+        <AnimateIn>
+          <section className="container section-padding" aria-labelledby="depth-heading">
+            <h2
+              id="depth-heading"
+              className="text-3xl md:text-4xl font-bold tracking-tight text-charcoal"
+            >
+              {service.name} in {city.city}: The Details
+            </h2>
+            <div className="mt-8 space-y-10 max-w-3xl">
+              {depthSections.map((section) => (
+                <div key={section.heading}>
+                  <h3 className="text-xl font-semibold text-charcoal">{section.heading}</h3>
+                  {section.paragraphs.map((paragraph, i) => (
+                    <p key={i} className="mt-3 text-muted-foreground leading-relaxed">
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </section>
+        </AnimateIn>
       )}
 
       {/* Shared boilerplate below this point -- identical across every city for this service. */}

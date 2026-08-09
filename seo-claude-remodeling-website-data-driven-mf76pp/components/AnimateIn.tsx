@@ -1,11 +1,13 @@
 "use client";
 
-import { LazyMotion, domAnimation, m } from "framer-motion";
+import { LazyMotion, domAnimation, m, useReducedMotion } from "framer-motion";
 import type { ReactNode } from "react";
 
 /**
  * Lightweight scroll-in animation wrapper.
  * Uses LazyMotion + the minimal `domAnimation` bundle to keep JS small.
+ * Respects prefers-reduced-motion: users who've asked for less motion get an
+ * instant, un-animated reveal instead of the slide/fade.
  */
 export function AnimateIn({
   children,
@@ -16,6 +18,12 @@ export function AnimateIn({
   delay?: number;
   className?: string;
 }) {
+  const reduceMotion = useReducedMotion();
+
+  if (reduceMotion) {
+    return <div className={className}>{children}</div>;
+  }
+
   return (
     <LazyMotion features={domAnimation} strict>
       <m.div

@@ -33,6 +33,13 @@
   body {
     @apply bg-background text-foreground antialiased;
   }
+
+  /* Sitewide: expressive serif on major headings (h1/h2), clean sans stays
+     on h3+ for hierarchy contrast -- propagated from the homepage pilot. */
+  h1,
+  h2 {
+    font-family: var(--font-heading), var(--font-sans), system-ui, sans-serif;
+  }
 }
 
 @layer utilities {

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Fraunces } from "next/font/google";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { FloatingContactButton } from "@/components/FloatingContactButton";
@@ -12,6 +12,17 @@ const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-sans",
+});
+
+// Heading font for the homepage refinement pilot -- warm, premium serif
+// distinct from both cold corporate-legal and fashion-editorial pairings.
+// tailwind.config.ts already wires up font-heading to this variable; it was
+// unset before, so every heading silently fell back to font-sans.
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["500", "600", "700"],
+  variable: "--font-heading",
 });
 
 export const metadata: Metadata = {
@@ -31,7 +42,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={`${inter.variable} ${fraunces.variable}`}>
       {/*
         Plain HTML <script> tags (not next/script) so they're literal,
         static markup in the server-rendered <head> -- required for Google
