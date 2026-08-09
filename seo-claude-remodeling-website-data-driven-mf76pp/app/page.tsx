@@ -62,7 +62,7 @@ export default function HomePage() {
         eyebrow={`Rated ${companyStat("Average Rating")} by DFW homeowners`}
         title={
           <>
-            Home Remodeling&apos;s{" "}
+            Home Remodeling{" "}
             <span className="text-primary">Fort Worth TX</span>
           </>
         }
