@@ -78,6 +78,54 @@ export const blogPosts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "small-bathroom-remodeling-ideas",
+    title: "Modern Small Bathroom Remodeling Ideas",
+    metaDescription:
+      "10 real design ideas for a small bathroom remodel — curbless showers, floating vanities, recessed niches, and warm fixtures — plus real DFW pricing and what each idea actually costs.",
+    keyword: "small bathroom remodeling ideas",
+    excerpt:
+      "Ten ways to make a small bathroom feel bigger and look current, from a curbless walk-in shower to a floating vanity with backlit mirror — with real DFW cost ranges for each.",
+    publishedDate: "2026-08-09",
+    heroImage: {
+      src: "/images/blog/small-bathroom-remodeling-ideas/small-bathroom-remodel-full-view.jpg",
+      alt: "Small bathroom with a backlit round mirror, floating wood vanity, and frameless glass shower",
+    },
+    relatedServiceSlug: "bathroom-remodeling",
+    relatedCitySlugs: ["fort-worth-tx"],
+    faqs: [
+      {
+        question: "What's the best layout for a small bathroom remodel?",
+        answer:
+          "Tuck the shower into a corner or along one wall so the middle of the room stays open, and swap a hinged door for a pocket door or a door that swings out instead of in. Those two changes free up more usable floor space than almost anything else you can do in a small footprint.",
+      },
+      {
+        question: "Is a walk-in shower better than a tub in a small bathroom?",
+        answer:
+          "For a small hall or guest bathroom, most homeowners get more usable space and an easier remodel out of a curbless walk-in shower with frameless glass than a tub. If the home only has one bathroom, we generally recommend keeping at least one tub in the house for resale.",
+      },
+      {
+        question: "How much does it cost to remodel a small bathroom?",
+        answer:
+          "A cosmetic refresh — new paint, fixtures, vanity top, and lighting with no layout change — runs about $2,500–$10,000. Anything that changes the layout, like converting a tub to a walk-in shower or moving plumbing, moves into the standard full remodel range of $12,000–$30,000. DFW cost per square foot typically runs $70–$250.",
+      },
+      {
+        question: "How long does a small bathroom remodel take?",
+        answer:
+          "A cosmetic refresh takes a few days. A standard full remodel of a small hall or guest bathroom typically takes 1–4 weeks, with most bathrooms done in 2–3 weeks.",
+      },
+      {
+        question: "Can a small bathroom be remodeled for aging in place?",
+        answer:
+          "Yes — curbless entry, grab bars with proper blocking, a comfort-height toilet, and slip-resistant tile all fit a small footprint and are common requests we design for.",
+      },
+      {
+        question: "Do I need a permit to remodel a small bathroom?",
+        answer:
+          "Any work that touches plumbing or electrical — moving a shower drain, adding a light over a new vanity — needs a permit and inspection per your city's requirements. We handle that paperwork as part of the project.",
+      },
+    ],
+  },
 ];
 
 export const getBlogPost = (slug: string): BlogPost | undefined =>
