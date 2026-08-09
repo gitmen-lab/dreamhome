@@ -71,6 +71,7 @@ export default function HomePage() {
           src: "/images/dfw-home-remodel-exterior-dusk.jpg",
           alt: "Beautifully lit suburban home exterior at dusk",
         }}
+        backgroundVideo={{ src: "/images/home-remodeling-video-bg.mp4" }}
         formSlot={<ContactForm />}
       />
 
@@ -103,68 +104,80 @@ export default function HomePage() {
       <section className="bg-charcoal-dark text-white" aria-labelledby="why-heading">
         <div className="container section-padding">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-            <div>
-              <h2
-                id="why-heading"
-                className="text-3xl md:text-4xl font-bold tracking-tight"
-              >
-                Why DFW Homeowners Choose {company.name}
-              </h2>
-              <p className="mt-4 text-gray-300 leading-relaxed">
-                Since {company.foundedYear}, we&apos;ve completed {companyStat("Projects Completed")} projects
-                across the Metroplex. Our promise is simple: honest pricing, skilled
-                crews, and homes treated with respect.
-              </p>
-              <ul className="mt-8 space-y-4">
-                {company.guarantees.map((g) => (
-                  <li key={g} className="flex items-start gap-3">
-                    <CheckCircle2
-                      className="h-6 w-6 text-primary shrink-0 mt-0.5"
-                      aria-hidden="true"
-                    />
-                    <span className="text-gray-200">{g}</span>
-                  </li>
-                ))}
-              </ul>
-              <Button size="lg" className="mt-8" asChild>
-                <Link href="/about">More About Our Team</Link>
-              </Button>
-            </div>
-            <dl className="grid grid-cols-2 gap-6">
-              {company.stats.map((stat) => (
-                <div
-                  key={stat.label}
-                  className="rounded-lg border border-white/10 bg-white/5 p-8 text-center"
+            <AnimateIn>
+              <div>
+                <h2
+                  id="why-heading"
+                  className="text-3xl md:text-4xl font-bold tracking-tight"
                 >
-                  <dd className="text-4xl font-bold text-blue-300">{stat.value}</dd>
-                  <dt className="mt-2 text-sm text-gray-300">{stat.label}</dt>
-                </div>
-              ))}
-            </dl>
+                  Why DFW Homeowners Choose {company.name}
+                </h2>
+                <p className="mt-4 text-gray-300 leading-relaxed">
+                  Since {company.foundedYear}, we&apos;ve completed {companyStat("Projects Completed")} projects
+                  across the Metroplex. Our promise is simple: honest pricing, skilled
+                  crews, and homes treated with respect.
+                </p>
+                <ul className="mt-8 space-y-4">
+                  {company.guarantees.map((g) => (
+                    <li key={g} className="flex items-start gap-3">
+                      <CheckCircle2
+                        className="h-6 w-6 text-primary shrink-0 mt-0.5"
+                        aria-hidden="true"
+                      />
+                      <span className="text-gray-200">{g}</span>
+                    </li>
+                  ))}
+                </ul>
+                <Button size="lg" className="mt-8" asChild>
+                  <Link href="/about">More About Our Team</Link>
+                </Button>
+              </div>
+            </AnimateIn>
+            <AnimateIn delay={0.1}>
+              <dl className="grid grid-cols-2 gap-6">
+                {company.stats.map((stat) => (
+                  <div
+                    key={stat.label}
+                    className="rounded-lg border border-white/10 bg-white/5 p-8 text-center"
+                  >
+                    <dd className="text-4xl font-bold text-blue-300">{stat.value}</dd>
+                    <dt className="mt-2 text-sm text-gray-300">{stat.label}</dt>
+                  </div>
+                ))}
+              </dl>
+            </AnimateIn>
           </div>
         </div>
       </section>
 
-      <ProcessSteps steps={homeProcess} heading="How It Works" />
+      <AnimateIn>
+        <ProcessSteps steps={homeProcess} heading="How It Works" />
+      </AnimateIn>
 
-      <Gallery items={galleryItems.slice(0, 6)} />
+      <AnimateIn>
+        <Gallery items={galleryItems.slice(0, 6)} />
+      </AnimateIn>
 
-      <Testimonials items={testimonials.slice(0, 6)} />
+      <AnimateIn>
+        <Testimonials items={testimonials.slice(0, 6)} />
+      </AnimateIn>
 
       {/* Service areas */}
       <section className="container section-padding" aria-labelledby="areas-heading">
-        <div className="text-center max-w-2xl mx-auto">
-          <h2
-            id="areas-heading"
-            className="text-3xl md:text-4xl font-bold tracking-tight text-charcoal"
-          >
-            Proudly Serving {cities.length} DFW Communities
-          </h2>
-          <p className="mt-4 text-muted-foreground">
-            From Fort Worth to Denton, Arlington to Southlake — our crews are local to
-            the Metroplex and know its homes inside and out.
-          </p>
-        </div>
+        <AnimateIn>
+          <div className="text-center max-w-2xl mx-auto">
+            <h2
+              id="areas-heading"
+              className="text-3xl md:text-4xl font-bold tracking-tight text-charcoal"
+            >
+              Proudly Serving {cities.length} DFW Communities
+            </h2>
+            <p className="mt-4 text-muted-foreground">
+              From Fort Worth to Denton, Arlington to Southlake — our crews are local to
+              the Metroplex and know its homes inside and out.
+            </p>
+          </div>
+        </AnimateIn>
         <div className="mt-10">
           <CityLinks cities={cities} />
         </div>
@@ -175,10 +188,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      <FAQAccordion
-        faqs={generalFaqs}
-        subheading="Straight answers to the questions homeowners ask us most."
-      />
+      <AnimateIn>
+        <FAQAccordion
+          faqs={generalFaqs}
+          subheading="Straight answers to the questions homeowners ask us most."
+        />
+      </AnimateIn>
 
       <CTASection />
     </>

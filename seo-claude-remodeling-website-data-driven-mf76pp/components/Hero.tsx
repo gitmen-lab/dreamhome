@@ -13,6 +13,14 @@ interface HeroProps {
   compact?: boolean;
   backgroundImage?: { src: string; alt: string };
   /**
+   * Optional looping background video, layered over `backgroundImage` (which
+   * still renders first/underneath as the poster and LCP element, and as the
+   * fallback for prefers-reduced-motion via a pure-CSS `motion-reduce:hidden`
+   * -- no client component needed to keep this a server component). Muted,
+   * autoplaying, and decorative, so it's aria-hidden.
+   */
+  backgroundVideo?: { src: string };
+  /**
    * Renders arbitrary content (e.g. a contact form) alongside the hero copy
    * in a two-column layout on large screens. Passed as a slot rather than
    * imported directly so pages that don't use it (all the compact/service
@@ -48,6 +56,7 @@ export function Hero({
   eyebrow,
   compact = false,
   backgroundImage,
+  backgroundVideo,
   formSlot,
   locale = "en",
 }: HeroProps) {
@@ -109,8 +118,21 @@ export function Hero({
           className="object-cover"
         />
       )}
-      {/* Dark overlay so white text stays legible over a photo background */}
-      {backgroundImage && (
+      {backgroundVideo && (
+        <video
+          className="absolute inset-0 h-full w-full object-cover motion-reduce:hidden"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          aria-hidden="true"
+        >
+          <source src={backgroundVideo.src} type="video/mp4" />
+        </video>
+      )}
+      {/* Dark overlay so white text stays legible over a photo/video background */}
+      {(backgroundImage || backgroundVideo) && (
         <div
           className="pointer-events-none absolute inset-0 bg-gradient-to-r from-charcoal-dark via-charcoal-dark/85 to-charcoal-dark/50"
           aria-hidden="true"
