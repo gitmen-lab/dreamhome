@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Phone, ShieldCheck, Star, BadgeCheck } from "lucide-react";
+import { Phone, ShieldCheck, Star, BadgeCheck, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { company } from "@/data/company";
 import { telHref, companyStat } from "@/lib/helpers";
@@ -9,6 +9,8 @@ import type { ReactNode } from "react";
 interface HeroProps {
   title: ReactNode;
   subtitle: string;
+  /** Optional short value-prop list rendered below the subtitle instead of one dense sentence. */
+  bullets?: string[];
   eyebrow?: string;
   compact?: boolean;
   backgroundImage?: { src: string; alt: string };
@@ -53,6 +55,7 @@ const STRINGS = {
 export function Hero({
   title,
   subtitle,
+  bullets,
   eyebrow,
   compact = false,
   backgroundImage,
@@ -73,6 +76,16 @@ export function Hero({
         {title}
       </h1>
       <p className="mt-6 text-lg md:text-xl text-gray-300 leading-relaxed">{subtitle}</p>
+      {bullets && bullets.length > 0 && (
+        <ul className="mt-6 space-y-2">
+          {bullets.map((bullet) => (
+            <li key={bullet} className="flex items-start gap-2 text-gray-300">
+              <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" aria-hidden="true" />
+              <span>{bullet}</span>
+            </li>
+          ))}
+        </ul>
+      )}
       <div className="mt-8 flex flex-col sm:flex-row gap-4">
         <Button size="lg" asChild>
           {/* No Spanish /contact page in this pilot yet — links to the real English

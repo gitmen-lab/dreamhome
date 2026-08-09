@@ -66,7 +66,12 @@ export default function HomePage() {
             <span className="text-primary">Licensed Home Remodeling Contractor</span>
           </>
         }
-        subtitle={`Remodeling done right, backed by proof — searching for a remodeling contractor near me? From kitchens and bathrooms to painting, flooring, drywall, and demolition, ${company.name} delivers licensed, warrantied craftsmanship across ${cities.length} DFW communities.`}
+        subtitle="Remodeling done right, backed by proof."
+        bullets={[
+          "Kitchens, baths, painting, flooring, drywall & demolition — one team",
+          "Licensed, insured, and warrantied on every project",
+          `Free estimates across ${cities.length} DFW communities`,
+        ]}
         backgroundImage={{
           src: "/images/dfw-home-remodel-exterior-dusk.jpg",
           alt: "Beautifully lit suburban home exterior at dusk",
