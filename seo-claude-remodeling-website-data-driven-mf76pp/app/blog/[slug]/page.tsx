@@ -6,6 +6,7 @@ import { ChevronLeft } from "lucide-react";
 import { getBlogPost, blogPostSlugs } from "@/data/blogPosts";
 import { blogPostSlugsEsMx } from "@/data/blogPosts.es-mx";
 import { blogBodies } from "@/content/blog";
+import { RelatedArticles } from "@/components/RelatedArticles";
 import {
   buildMetadata,
   articleSchema,
@@ -119,6 +120,8 @@ export default async function BlogPostPage({
             </dl>
           </div>
         )}
+
+        <RelatedArticles slugs={post.relatedPostSlugs ?? []} />
       </div>
     </article>
   );

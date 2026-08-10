@@ -32,14 +32,17 @@ export default function SmallBathroomRemodelingIdeas() {
       <div className="rounded-lg border bg-card p-6 shadow-sm">
         <p className="text-sm font-semibold uppercase tracking-wide text-primary">Short answer</p>
         <p className="mt-2 text-charcoal leading-relaxed">
-          The small bathrooms that feel the biggest share the same moves: a curbless walk-in shower
-          instead of a tub, a floating vanity that shows floor underneath it, one continuous surface
-          instead of a dozen small materials, and light that comes from more than one source. None of
-          it requires knocking out walls.
+          These small bathroom remodeling ideas share the same moves: a curbless walk-in shower
+          instead of a tub, a floating vanity that shows floor underneath it, an oversized mirror,
+          one continuous surface instead of a dozen small materials, and light from more than one
+          source. None of it requires knocking out walls.
         </p>
         <p className="mt-3 text-sm text-muted-foreground">
           The photos below illustrate each idea. They&apos;re curated design examples, not all from a{" "}
-          {company.name} project — the ones that are ours are labeled as such.
+          <Link href="/services/bathroom-remodeling" className="text-primary hover:underline">
+            {company.name} bathroom remodel
+          </Link>{" "}
+          — the ones that are ours are labeled as such.
         </p>
       </div>
 
@@ -58,7 +61,12 @@ export default function SmallBathroomRemodelingIdeas() {
         caption="Design idea: frameless glass and a curbless entry remove the visual break between the shower and the rest of the room."
       />
       <div className="mt-6 rounded-lg border bg-muted p-5">
-        <p className="text-sm font-semibold text-charcoal">A real one we built in Fort Worth</p>
+        <p className="text-sm font-semibold text-charcoal">
+          A real one we built in{" "}
+          <Link href="/service-areas/fort-worth-tx" className="text-primary hover:underline">
+            Fort Worth
+          </Link>
+        </p>
         <IdeaImage
           src="/images/gallery/bathroom-remodel-after-tile-walk-in-shower.jpg"
           alt="Finished walk-in shower with white subway tile, shiplap accent wall, and patterned floor tile"
@@ -126,9 +134,10 @@ export default function SmallBathroomRemodelingIdeas() {
         6. Vertical tile and a color that isn&apos;t gray
       </h2>
       <p className="mt-3 text-muted-foreground leading-relaxed">
-        Vertical tile lines draw the eye up, which makes a low ceiling feel taller. Pair that with a
-        warmer color — sage, olive, warm white — instead of the cool gray that dominated the last
-        decade of bathroom remodels, and a small room reads as intentional rather than cramped.
+        Vertical tile lines draw the eye up, which makes a low ceiling feel taller. Large-format tile
+        does the same thing a different way — fewer grout lines read as more open wall. Pair either
+        with a warmer color — sage, olive, warm white — instead of the cool gray that dominated the
+        last decade of bathroom remodels, and a small room reads as intentional rather than cramped.
       </p>
       <IdeaImage
         src={`${IMG_BASE}/sage-green-vertical-tile-idea.jpg`}
@@ -195,14 +204,34 @@ export default function SmallBathroomRemodelingIdeas() {
       />
 
       <h2 className="mt-12 text-2xl font-bold tracking-tight text-charcoal">
+        11. One oversized mirror instead of a small one
+      </h2>
+      <p className="mt-3 text-muted-foreground leading-relaxed">
+        A mirror that runs close to the ceiling and spans most of the vanity wall reflects far more
+        light than a standard framed mirror. It&apos;s one of the cheapest changes on this list — a
+        swap, not a remodel — and it does more for how big the room feels than almost anything else
+        here.
+      </p>
+
+      <h2 className="mt-12 text-2xl font-bold tracking-tight text-charcoal">
+        12. A pocket door instead of a swinging one
+      </h2>
+      <p className="mt-3 text-muted-foreground leading-relaxed">
+        A standard hinged door swings into 8–10 square feet of floor space that&apos;s unusable while
+        it&apos;s open. A pocket door slides into the wall and gives that space back. It&apos;s real
+        construction — the wall has to be opened and framed for the door cavity — so plan on it during
+        a fuller remodel rather than as a weekend swap.
+      </p>
+
+      <h2 className="mt-12 text-2xl font-bold tracking-tight text-charcoal">
         What each idea actually costs
       </h2>
       <p className="mt-3 text-muted-foreground leading-relaxed">
-        Ideas #3, #4, #6 (as a paint/color change), #8, #9, and #10 are cosmetic changes — new fixtures,
-        a vanity swap, paint, and lighting with no layout change. Those fall in the{" "}
+        Ideas #3, #4, #6 (as a paint/color change), #8, #9, #10, and #11 are cosmetic changes — new
+        fixtures, a vanity swap, paint, and lighting with no layout change. Those fall in the{" "}
         <strong className="text-charcoal">$2,500–$10,000</strong> cosmetic refresh range. Ideas #1, #2,
-        #5 (as a full retile), and #7 involve tearing into the shower or wall assembly, which moves the
-        project into the{" "}
+        #5 (as a full retile), #7, and #12 involve tearing into the shower or wall assembly, which moves
+        the project into the{" "}
         <strong className="text-charcoal">$12,000–$30,000</strong> standard full remodel range. DFW cost
         per square foot typically runs $70–$250. Every project gets a free, line-item estimate before
         anything is torn out, so you know which range you&apos;re in before you commit.
