@@ -55,11 +55,7 @@ export const company: Company = {
   // license number is one of the strongest trust/E-E-A-T signals available
   // for a home-services business. Leave unset until you have the real one.
   licenseNumber: undefined,
-  hours: [
-    { days: "Monday – Friday", hours: "7:30 AM – 6:30 PM" },
-    { days: "Saturday", hours: "8:00 AM – 4:00 PM" },
-    { days: "Sunday", hours: "Closed" },
-  ],
+  hours: [{ days: "Every day", hours: "Open 24 hours" }],
   // Real Google Business Profile URL, built from the verified place ID below —
   // this feeds schema.org sameAs on Organization.
   social: [
