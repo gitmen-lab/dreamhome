@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Phone, Mail, MapPin, Clock } from "lucide-react";
+import Link from "next/link";
+import { Phone, Mail, MapPin, Clock, CalendarClock } from "lucide-react";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ContactForm } from "@/components/ContactForm";
 import { LocationMap } from "@/components/LocationMap";
@@ -88,6 +89,15 @@ export default function ContactPage() {
                 </div>
               </div>
             </dl>
+
+            <p className="mt-6 flex items-center gap-2 text-sm text-muted-foreground">
+              <CalendarClock className="h-5 w-5 text-primary shrink-0" aria-hidden="true" />
+              Prefer to just pick a time?{" "}
+              <Link href="/schedule" className="font-semibold text-primary hover:underline">
+                Schedule a consultation online
+              </Link>
+              .
+            </p>
 
             <div className="mt-8">
               <LocationMap />

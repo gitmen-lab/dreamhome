@@ -144,6 +144,11 @@ export function Footer() {
                   Contact & Free Estimates
                 </Link>
               </li>
+              <li>
+                <Link href="/schedule" className="hover:text-white transition-colors">
+                  Schedule a Consultation
+                </Link>
+              </li>
             </ul>
             <h2 className="mt-8 text-sm font-semibold uppercase tracking-wider text-white">
               Hours
