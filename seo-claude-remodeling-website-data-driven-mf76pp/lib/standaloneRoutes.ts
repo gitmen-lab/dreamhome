@@ -9,6 +9,7 @@ export const STANDALONE_ROUTES: string[] = [
   "/bath-renovation-near-you",
   "/conversion-de-tina-a-regadera",
   "/bathroom-remodel-fort-worth",
+  "/affordable-bathroom-remodel-fort-worth",
   "/dashboard",
   "/complete-house-renovation",
 ];
